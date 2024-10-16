@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="flex flex-col gap-8">
+      <main className="animate-fade-up flex flex-col gap-8">
         <HeroSection />
         <AboutSection />
       </main>
