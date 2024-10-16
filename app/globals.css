@@ -20,6 +20,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@layer base {
+  .gradient-text {
+    @apply bg-gradient-to-br from-pink-500 to-orange-400 inline-block text-transparent bg-clip-text;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
