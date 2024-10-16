@@ -1,13 +1,13 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-5.44 -5.44 42.88 42.88" xml:space="preserve" width="256px" height="256px" fill="#ec4899" stroke="#ec4899" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
-
-<g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
-
-<rect x="-5.44" y="-5.44" width="42.88" height="42.88" rx="21.44" fill="#fb923c" strokewidth="0"/>
-
-</g>
+<svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-5.44 -5.44 42.88 42.88" xml:space="preserve" width="256px" height="256px" fill="url('#myGradient')"  transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
+<defs>
+    <linearGradient id="myGradient" gradientTransform="rotate(45)">
+      <stop offset="5%" stop-color="#ec4899" />
+      <stop offset="95%" stop-color="#fb923c" />
+    </linearGradient>
+  </defs>
 
 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.064"/>
 
