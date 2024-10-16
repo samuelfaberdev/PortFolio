@@ -7,7 +7,9 @@ export default function HeroSection() {
         <h1 className="text-5xl gradient-text">
           Hello, world ! Moi c'est <strong>Samuel</strong> !
         </h1>
-        <h2 className="text-4xl">Bienvenue sur mon Portfolio.</h2>
+        <h2 className="text-4xl">
+          Bienvenue sur mon <strong>Portfolio</strong>.
+        </h2>
         <p>
           Issu d&apos;une reconversion dans le{" "}
           <strong>développement web</strong>, je suis actuellement disponible
