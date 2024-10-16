@@ -13,8 +13,8 @@ export default function Navbar() {
         />
         <p className="gradient-text">samuelfaber.dev</p>
       </span>
-      <nav>
-        <ul className="flex text-xl gap-8">
+      <nav className="">
+        <ul className="flex text-2xl gap-8">
           <li>A propos</li>
           <li>Mes projets</li>
           <li>Contact</li>

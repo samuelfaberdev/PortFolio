@@ -4,10 +4,10 @@ export default function HeroSection() {
   return (
     <section className="w-full p-4 flex items-center justify-between gap-8">
       <article className="flex flex-col gap-4 w-3/6">
-        <h1 className="text-4xl gradient-text">
+        <h1 className="text-5xl gradient-text">
           Hello, world ! Moi c'est <strong>Samuel</strong> !
         </h1>
-        <h2 className="text-3xl">Bienvenue sur mon Portfolio.</h2>
+        <h2 className="text-4xl">Bienvenue sur mon Portfolio.</h2>
         <p>
           Issu d&apos;une reconversion dans le{" "}
           <strong>développement web</strong>, je suis actuellement disponible
