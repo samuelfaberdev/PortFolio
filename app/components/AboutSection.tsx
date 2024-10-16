@@ -14,9 +14,18 @@ const DATA: DATA[] = [
     id: "hardskills",
     content: (
       <ul className="list-disc pl-8">
-        <li>Front : React.js // Next.js // Tailwind</li>
-        <li>Back : Node.js // Express // GraphQL // TypeORM</li>
-        <li>Base de données : SQL // MySQL // PostgreSQL // SQLite</li>
+        <li>
+          <span className="font-bold">Front :</span> React.js // Next.js //
+          Tailwind
+        </li>
+        <li>
+          <span className="font-bold">Back :</span> Node.js // Express //
+          GraphQL // TypeORM
+        </li>
+        <li>
+          <span className="font-bold">Base de données :</span> SQL // MySQL //
+          PostgreSQL // SQLite
+        </li>
         <li>Veille technologique</li>
       </ul>
     ),
@@ -27,12 +36,10 @@ const DATA: DATA[] = [
     content: (
       <ul className="list-disc pl-8">
         <li>Travail en équipe</li>
-        <li>Résolution de problèmes</li>
-        <li>Gestion des priorités</li>
-        <li>Prise de décision rapide</li>
-        <li>Capacité d&apos;adaptation</li>
-        <li>Polyvalence, réactivité, autonomie</li>
-        <li>Aime être challengée</li>
+        <li>Pédagogue</li>
+        <li>Adaptabilité</li>
+        <li>Polyvalence</li>
+        <li>Autonomie</li>
       </ul>
     ),
   },
@@ -42,13 +49,13 @@ const DATA: DATA[] = [
     content: (
       <ul className="list-disc pl-8">
         <li>
-          Titre RNCP - Concepteur Développeur d'Applications -{" "}
+          Titre RNCP niveau 6 - Concepteur Développeur d'Applications -{" "}
           <a href="https://wildcodeschool.fr/" className="gradient-text">
             Wild Code School
           </a>
         </li>
         <li>
-          Titre RNCP - Développeur Web et Web Mobile -{" "}
+          Titre RNCP niveau 5 - Développeur Web et Web Mobile -{" "}
           <a href="https://wildcodeschool.fr/" className="gradient-text">
             Wild Code School
           </a>
@@ -76,7 +83,21 @@ const DATA: DATA[] = [
     id: "experiences",
     content: (
       <ul className="list-disc pl-8">
-        <li>Teaching Assistant à la Wild Code School</li>
+        <li>
+          Teaching Assistant - Apprentissage -{" "}
+          <a href="https://wildcodeschool.fr/" className="gradient-text">
+            Wild Code School
+          </a>
+        </li>
+        <li>
+          Développeur web - Stage -{" "}
+          <a
+            href="https://www.linkedin.com/in/erwan-marcq-727077211/"
+            className="gradient-text"
+          >
+            Wandev
+          </a>
+        </li>
       </ul>
     ),
   },
@@ -100,16 +121,16 @@ export default function AboutSection() {
           className="rounded-3xl"
           src={"/images/bureau.jpg"}
           alt="Un bureau d'ordinateur"
-          width={480}
-          height={480}
+          width={400}
+          height={400}
         />
       </div>
       <article className="flex flex-col gap-4 w-4/6">
         <h2 className="text-4xl">A propos de moi</h2>
         <p>
-          De formation initial dans la maintenance industrielle puis
-          biomédicales, j'ai souhaité faire une reconversion dans le
-          développement web.
+          De formation initiale dans la maintenance industrielle puis
+          biomédicales, ainsi que de nombreux autres métiers, j'ai souhaité
+          faire une reconversion dans le développement web.
         </p>
         <p>
           Dans cette section vous découvrirez mes diverses compétences acquises
@@ -117,26 +138,36 @@ export default function AboutSection() {
           mes différentes expériences dans le milieu du développement.
         </p>
         <div className="flex gap-4">
-          <button onClick={() => handleTabChange("hardskills")}>
-            {" "}
-            Hard Skills <p className={tab === "hardskills" ? "active" : ""}></p>
+          <button
+            className="font-bold"
+            onClick={() => handleTabChange("hardskills")}
+          >
+            Hard Skills
+            <p className={tab === "hardskills" ? "active" : "h-0.5"}></p>
           </button>
 
-          <button onClick={() => handleTabChange("softskills")}>
-            {" "}
-            Soft Skills <p className={tab === "softskills" ? "active" : ""}></p>
+          <button
+            className="font-bold"
+            onClick={() => handleTabChange("softskills")}
+          >
+            Soft Skills
+            <p className={tab === "softskills" ? "active" : "h-0.5"}></p>
           </button>
 
-          <button onClick={() => handleTabChange("education")}>
-            {" "}
-            Education <p className={tab === "education" ? "active" : ""}></p>
+          <button
+            className="font-bold"
+            onClick={() => handleTabChange("education")}
+          >
+            Education
+            <p className={tab === "education" ? "active" : "h-0.5"}></p>
           </button>
 
-          {/* Bouton pour l'onglet "Experiences & Certifications" */}
-          <button onClick={() => handleTabChange("experiences")}>
-            {" "}
-            Experiences & Certifications{" "}
-            <p className={tab === "experiences" ? "active" : ""}></p>
+          <button
+            className="font-bold"
+            onClick={() => handleTabChange("experiences")}
+          >
+            Experiences
+            <p className={tab === "experiences" ? "active" : "h-0.5"}></p>
           </button>
         </div>
         <div>{DATA.find((t) => t.id === tab)?.content}</div>
