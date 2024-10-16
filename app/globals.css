@@ -21,6 +21,9 @@ body {
 }
 
 @layer base {
+  .active {
+    @apply animate-shake h-0.5 bg-gradient-to-br from-pink-500 to-orange-400;
+  }
   .gradient-text {
     @apply bg-gradient-to-br from-pink-500 to-orange-400 inline-block text-transparent bg-clip-text;
   }
