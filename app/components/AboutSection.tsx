@@ -158,7 +158,7 @@ export default function AboutSection() {
             className="font-bold"
             onClick={() => handleTabChange("education")}
           >
-            Education
+            Formations
             <p className={tab === "education" ? "active" : "h-0.5"}></p>
           </button>
 
