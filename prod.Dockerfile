@@ -19,6 +19,10 @@ COPY postcss.config.mjs .
 
 # Environment variables must be present at build time
 # https://github.com/vercel/next.js/discussions/14030
+ARG TO_EMAIL
+ENV TO_EMAIL=${TO_EMAIL}
+ARG RESEND_API_KEY
+ENV RESEND_API_KEY=${RESEND_API_KEY}
 
 # Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line to disable telemetry at build time
@@ -47,6 +51,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Environment variables must be redefined at run time
+ARG TO_EMAIL
+ENV TO_EMAIL=${TO_EMAIL}
+ARG RESEND_API_KEY
+ENV RESEND_API_KEY=${RESEND_API_KEY}
 
 # Uncomment the following line to disable telemetry at run time
 # ENV NEXT_TELEMETRY_DISABLED 1
