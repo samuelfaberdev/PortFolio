@@ -1,6 +1,6 @@
 services:
-  next-app:
-    container_name: next-app
+  portfolio:
+    container_name: portfolio
     build:
       context: .
       dockerfile: prod.Dockerfile
