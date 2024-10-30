@@ -49,7 +49,7 @@ const DATA: DATA[] = [
     content: (
       <ul className="list-disc pl-8">
         <li>
-          Titre RNCP niveau 6 - Concepteur Développeur d'Applications -{" "}
+          Titre RNCP niveau 6 - Concepteur Développeur d&apos;Applications -{" "}
           <a href="https://wildcodeschool.fr/" className="gradient-text">
             Wild Code School
           </a>
@@ -114,6 +114,8 @@ export default function AboutSection() {
     });
   };
 
+  console.info(isPending);
+
   return (
     <section className="w-full p-4 flex justify-between gap-32">
       <div className="w-2/6 rounded-lg">
@@ -129,7 +131,7 @@ export default function AboutSection() {
         <h2 className="text-4xl">A propos de moi</h2>
         <p>
           De formation initiale dans la maintenance industrielle puis
-          biomédicales, ainsi que de nombreux autres métiers, j'ai souhaité
+          biomédicales, ainsi que de nombreux autres métiers, j&apos;ai souhaité
           faire une reconversion dans le développement web.
         </p>
         <p>

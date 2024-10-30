@@ -5,7 +5,7 @@ export default function HeroSection() {
     <section className="w-full p-4 flex items-center justify-between gap-8">
       <article className="flex flex-col gap-4 w-3/6">
         <h1 className="text-5xl gradient-text">
-          Hello, world ! Moi c'est <strong>Samuel</strong> !
+          Hello, world ! Moi c&apos;est <strong>Samuel</strong> !
         </h1>
         <h2 className="text-4xl">
           Bienvenue sur mon <strong>Portfolio</strong>.
