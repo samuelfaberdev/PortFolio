@@ -1,12 +1,9 @@
 services:
   portfolio:
-    container_name: portfolio
-    build:
-      context: .
-      dockerfile: prod.Dockerfile
-      args:
-        TO_EMAIL: ${TO_EMAIL}
-        RESEND_API_KEY: ${RESEND_API_KEY}
-    restart: always
+    image: samuelfaberdev/portfolio
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
     ports:
       - 8000:3000
