@@ -5,14 +5,13 @@ import { FormEvent, useState } from "react";
 export default function ContactForm() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function submitContactForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     const data = {
-      email: (target.elements.namedItem("email") as HTMLInputElement).value,
-      subject: (target.elements.namedItem("subject") as HTMLInputElement).value,
-      message: (target.elements.namedItem("message") as HTMLTextAreaElement)
-        .value,
+      email: target.email.value as string,
+      subject: target.subject.value as string,
+      message: target.message.value as string,
     };
     const JSONdata = JSON.stringify(data);
     const endpoint = "/api/send";
@@ -26,10 +25,10 @@ export default function ContactForm() {
     };
 
     const response = await fetch(endpoint, options);
-    const resData = await response.json();
+    // const resData = await response.json();
 
     if (response.status === 200) {
-      console.log("Message sent.");
+      console.log("Message envoyé.");
       setEmailSubmitted(true);
     }
   }
@@ -41,7 +40,7 @@ export default function ContactForm() {
       ) : (
         <form
           className="flex flex-col items-center gap-4 w-full"
-          onSubmit={handleSubmit}
+          onSubmit={submitContactForm}
         >
           <div className="flex flex-col gap-1 w-full">
             <label className="pl-1" htmlFor="email">
