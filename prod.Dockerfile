@@ -12,6 +12,7 @@ RUN npm install
 
 COPY app ./app
 COPY public ./public
+COPY @types ./@types
 COPY next.config.mjs .
 COPY tsconfig.json .
 COPY tailwind.config.ts .
