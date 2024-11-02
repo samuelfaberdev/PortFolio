@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { contactMeAction } from "../actions";
@@ -76,6 +77,23 @@ export default function ContactForm() {
               placeholder="Salut Samuel, parlons un peu de ton projet..."
             ></textarea>
           </div>
+          <p className=" text-xs">
+            This site is protected by reCAPTCHA and the Google{" "}
+            <Link
+              className="gradient-text"
+              href="https://policies.google.com/privacy"
+            >
+              Privacy Policy
+            </Link>{" "}
+            and{" "}
+            <Link
+              className="gradient-text"
+              href="https://policies.google.com/terms"
+            >
+              Terms of Service
+            </Link>{" "}
+            apply.
+          </p>
           <button type="submit" className="gradient-button">
             Envoyer votre message
           </button>
