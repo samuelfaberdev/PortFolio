@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: prod.Dockerfile
       args:
-        RESEND_EMAIL: ${TO_EMAIL}
+        RESEND_EMAIL: ${RESEND_EMAIL}
         RESEND_API_KEY: ${RESEND_API_KEY}
         NEXT_PUBLIC_CAPTCHA_SITE_KEY: ${NEXT_PUBLIC_CAPTCHA_SITE_KEY}
         CAPTCHA_SECRET_KEY: ${CAPTCHA_SECRET_KEY}
