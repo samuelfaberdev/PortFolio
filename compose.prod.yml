@@ -1,13 +1,14 @@
 services:
   portfolio:
     container_name: portfolio
-    environment:
-      - NODE_ENV=production
-    env_file:
-      - .env
     build:
       context: .
       dockerfile: prod.Dockerfile
+      args:
+        RESEND_EMAIL: ${TO_EMAIL}
+        RESEND_API_KEY: ${RESEND_API_KEY}
+        NEXT_PUBLIC_CAPTCHA_SITE_KEY: ${NEXT_PUBLIC_CAPTCHA_SITE_KEY}
+        CAPTCHA_SECRET_KEY: ${CAPTCHA_SECRET_KEY}
     restart: always
     ports:
       - 8000:3000
