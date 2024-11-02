@@ -4,9 +4,7 @@ services:
     build:
       context: .
       dockerfile: prod.Dockerfile
-      args:
-        TO_EMAIL: ${TO_EMAIL}
-        RESEND_API_KEY: ${RESEND_API_KEY}
+      env_file: ".env"
     restart: always
     ports:
       - 8000:3000
