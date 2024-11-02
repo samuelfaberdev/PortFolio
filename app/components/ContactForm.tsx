@@ -78,21 +78,21 @@ export default function ContactForm() {
             ></textarea>
           </div>
           <p className=" text-xs">
-            This site is protected by reCAPTCHA and the Google{" "}
+            Ce site est protégé par reCAPTCHA, les{" "}
             <Link
               className="gradient-text"
               href="https://policies.google.com/privacy"
             >
-              Privacy Policy
+              Règles de Confidentialité
             </Link>{" "}
-            and{" "}
+            et les{" "}
             <Link
               className="gradient-text"
               href="https://policies.google.com/terms"
             >
-              Terms of Service
+              Conditions d&apos;Utilisation
             </Link>{" "}
-            apply.
+            de Google s&apos;appliquent.
           </p>
           <button type="submit" className="gradient-button">
             Envoyer votre message
