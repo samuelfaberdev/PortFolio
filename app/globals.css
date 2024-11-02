@@ -20,6 +20,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
 @layer base {
   .active {
     @apply animate-shake h-0.5 bg-gradient-to-br from-pink-500 to-orange-400;
