@@ -1,34 +1,22 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { contactMeAction } from "../actions";
+import { generateToken } from "../utils/captcha";
 
 export default function ContactForm() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  async function submitContactForm(e: FormEvent<HTMLFormElement>) {
+  async function submitContactForm(e: FormEvent) {
     e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    const data = {
-      email: target.email.value as string,
-      subject: target.subject.value as string,
-      message: target.message.value as string,
-    };
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSONdata,
-    };
+    const token = await generateToken();
 
-    const response = await fetch(endpoint, options);
-    // const resData = await response.json();
+    const res = await contactMeAction(token, formData);
 
-    if (response.status === 200) {
-      console.log("Message envoyé.");
+    if (res.success) {
       setEmailSubmitted(true);
     }
   }
@@ -39,6 +27,7 @@ export default function ContactForm() {
         <p className="text-green-500">Email envoyé avec succès !</p>
       ) : (
         <form
+          name="contactForm"
           className="flex flex-col items-center gap-4 w-full"
           onSubmit={submitContactForm}
         >
