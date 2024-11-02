@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import "./globals.css";
@@ -30,6 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center w-full mx-auto h-screen max-w-[1440px] gap-4 pt-24`}
       >
+        <Script
+          strategy="beforeInteractive"
+          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}`}
+        />
         <Header />
         {children}
         <Footer />
