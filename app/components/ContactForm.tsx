@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import { contactMeAction } from "../actions";
 import { generateToken } from "../utils/captcha";
 
@@ -16,15 +17,21 @@ export default function ContactForm() {
 
     const res = await contactMeAction(token, formData);
 
+    console.log({ res });
+
     if (res.success) {
+      toast.success(res.message);
       setEmailSubmitted(true);
+    }
+    if (!res.success) {
+      toast.error(res.message);
     }
   }
 
   return (
     <div className="flex items-center justify-center w-1/2">
       {emailSubmitted ? (
-        <p className="text-green-500">Email envoyé avec succès !</p>
+        <p className="text-green-500">Message envoyé avec succès !</p>
       ) : (
         <form
           name="contactForm"
