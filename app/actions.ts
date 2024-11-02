@@ -9,7 +9,7 @@ export async function contactMeAction(
   if (!token) {
     return {
       success: false,
-      message: "Token not found.",
+      message: "Token non trouvé.",
     };
   }
 
@@ -19,14 +19,14 @@ export async function contactMeAction(
   if (!captchaData) {
     return {
       success: false,
-      message: "Captcha failed.",
+      message: "Le Captcha a échoué.",
     };
   }
 
   if (!captchaData.success || captchaData.score < 0.5) {
     return {
       success: false,
-      message: "Captcha failed.",
+      message: "Le Captcha a échoué.",
       errors: !captchaData.success ? captchaData.error_codes : null,
     };
   }
@@ -54,7 +54,7 @@ export async function contactMeAction(
 
   return {
     success: true,
-    message: "Message sent successfully.",
+    message: "Message envoyé avec succès.",
   };
 }
 
