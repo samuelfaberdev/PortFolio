@@ -69,7 +69,10 @@ export const PROJECTS: Project[] = [
     image: "/images/projets/inovin.webp",
     demo: { url: "https://inovin.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/WCS-Projet3-Inovin",
-    team: { role: "lead du projet, formulaire de dégustation et débogage" },
+    team: {
+      size: 6,
+      role: "lead du projet, formulaire de dégustation et débogage",
+    },
   },
   {
     title: "JWBook",
@@ -107,6 +110,7 @@ export const PROJECTS: Project[] = [
     demo: { url: "https://choixteau-cq.netlify.app/" },
     repo: "https://github.com/samuelfaberdev/WCS-Hackathon1-Choixteau",
     team: {
+      size: 5,
       role: "lead du projet, intégrations (dont Google Maps) et débogage",
     },
   },
@@ -121,6 +125,7 @@ export const PROJECTS: Project[] = [
     demo: { url: "https://wcs-projet2-allo-anime.vercel.app/" },
     repo: "https://github.com/samuelfaberdev/WCS-Projet2-AlloAnime",
     team: {
+      size: 4,
       role: "lead du projet, carrousel, intégration de l'API, une bonne partie du CSS et débogage",
     },
   },
