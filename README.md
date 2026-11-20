@@ -16,13 +16,13 @@ Le site est responsive (mobile, tablette, ordinateur) et suit le thème clair ou
 
 ## Stack technique
 
-| Domaine | Outils |
-| --- | --- |
-| Framework | [Next.js 14](https://nextjs.org/) (App Router, Server Actions), React 18, TypeScript |
-| Style | Tailwind CSS, `tailwindcss-animated` |
-| Formulaire de contact | [Resend](https://resend.com/) pour l'envoi d'e-mails, Google reCAPTCHA v3 |
-| Notifications | `react-toastify` |
-| Déploiement | Docker (build Next.js `standalone`), Docker Compose |
+| Domaine               | Outils                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| Framework             | [Next.js 14](https://nextjs.org/) (App Router, Server Actions), React 18, TypeScript |
+| Style                 | Tailwind CSS, `tailwindcss-animated`                                                 |
+| Formulaire de contact | [Resend](https://resend.com/) pour l'envoi d'e-mails, Google reCAPTCHA v3            |
+| Notifications         | `react-toastify`                                                                     |
+| Déploiement           | Docker (build Next.js `standalone`), Docker Compose                                  |
 
 ## Démarrage en local
 
@@ -42,23 +42,23 @@ Le site est disponible sur [http://localhost:3000](http://localhost:3000).
 
 ### Scripts
 
-| Commande | Rôle |
-| --- | --- |
-| `npm run dev` | Serveur de développement |
+| Commande        | Rôle                                                        |
+| --------------- | ----------------------------------------------------------- |
+| `npm run dev`   | Serveur de développement                                    |
 | `npm run build` | Build de production (lint et vérification des types inclus) |
-| `npm start` | Lance le build de production |
-| `npm run lint` | ESLint (`next/core-web-vitals`, `next/typescript`) |
+| `npm start`     | Lance le build de production                                |
+| `npm run lint`  | ESLint (`next/core-web-vitals`, `next/typescript`)          |
 
 ## Variables d'environnement
 
 Elles sont listées dans [`.env.sample`](.env.sample).
 
-| Variable | Rôle |
-| --- | --- |
-| `RESEND_EMAIL` | Adresse qui **reçoit** les messages du formulaire de contact |
-| `RESEND_API_KEY` | Clé API [Resend](https://resend.com/api-keys) |
+| Variable                       | Rôle                                                          |
+| ------------------------------ | ------------------------------------------------------------- |
+| `RESEND_EMAIL`                 | Adresse qui **reçoit** les messages du formulaire de contact  |
+| `RESEND_API_KEY`               | Clé API [Resend](https://resend.com/api-keys)                 |
 | `NEXT_PUBLIC_CAPTCHA_SITE_KEY` | Clé de site reCAPTCHA v3 (publique, utilisée côté navigateur) |
-| `CAPTCHA_SECRET_KEY` | Clé secrète reCAPTCHA v3 (utilisée côté serveur) |
+| `CAPTCHA_SECRET_KEY`           | Clé secrète reCAPTCHA v3 (utilisée côté serveur)              |
 
 Sans ces variables, le site s'affiche normalement, mais l'envoi du formulaire échoue. Pour tester le captcha en local, ajoute `localhost` aux domaines autorisés dans la [console reCAPTCHA](https://www.google.com/recaptcha/admin).
 
