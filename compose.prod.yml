@@ -12,3 +12,9 @@ services:
     restart: always
     ports:
       - 8000:3000
+    volumes:
+      # Conserve le compteur de l'easter egg entre deux redéploiements
+      - portfolio-data:/app/data
+
+volumes:
+  portfolio-data:

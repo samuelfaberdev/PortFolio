@@ -53,12 +53,13 @@ Le site est disponible sur [http://localhost:3000](http://localhost:3000).
 
 Elles sont listées dans [`.env.sample`](.env.sample).
 
-| Variable                       | Rôle                                                          |
-| ------------------------------ | ------------------------------------------------------------- |
-| `RESEND_EMAIL`                 | Adresse qui **reçoit** les messages du formulaire de contact  |
-| `RESEND_API_KEY`               | Clé API [Resend](https://resend.com/api-keys)                 |
-| `NEXT_PUBLIC_CAPTCHA_SITE_KEY` | Clé de site reCAPTCHA v3 (publique, utilisée côté navigateur) |
-| `CAPTCHA_SECRET_KEY`           | Clé secrète reCAPTCHA v3 (utilisée côté serveur)              |
+| Variable                       | Rôle                                                                                           |
+| ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `RESEND_EMAIL`                 | Adresse qui **reçoit** les messages du formulaire de contact                                   |
+| `RESEND_API_KEY`               | Clé API [Resend](https://resend.com/api-keys)                                                  |
+| `NEXT_PUBLIC_CAPTCHA_SITE_KEY` | Clé de site reCAPTCHA v3 (publique, utilisée côté navigateur)                                  |
+| `CAPTCHA_SECRET_KEY`           | Clé secrète reCAPTCHA v3 (utilisée côté serveur)                                               |
+| `DATA_DIR`                     | Facultatif. Dossier du compteur de l'easter egg (par défaut `./data`, `/app/data` dans Docker) |
 
 Sans ces variables, le site s'affiche normalement, mais l'envoi du formulaire échoue. Pour tester le captcha en local, ajoute `localhost` aux domaines autorisés dans la [console reCAPTCHA](https://www.google.com/recaptcha/admin).
 
@@ -71,6 +72,15 @@ Le formulaire appelle la Server Action `contactMeAction` ([`app/actions.ts`](app
 3. envoie le message **uniquement** à `RESEND_EMAIL`, avec un `replyTo` vers le visiteur, et un contenu HTML échappé.
 
 Le site n'envoie donc jamais d'e-mail vers une adresse saisie dans le formulaire. L'expéditeur `contact@samuelfaber.dev` doit appartenir à un domaine vérifié dans Resend.
+
+## Compteur de l'easter egg
+
+La page cachée affiche le nombre de personnes qui l'ont trouvée. Au chargement, le navigateur appelle `POST /api/easter-egg` ([`app/api/easter-egg/route.ts`](app/api/easter-egg/route.ts)) :
+
+- une **première visite** incrémente le compteur et pose un cookie `easter_egg_found`, valable un an ;
+- une **visite suivante** du même navigateur renvoie le total sans l'incrémenter.
+
+Le total est stocké dans `DATA_DIR/easter-egg-visits.json` ([`app/utils/visitCounter.ts`](app/utils/visitCounter.ts)). Les écritures sont atomiques et passent l'une après l'autre. Si le fichier est corrompu, l'API renvoie une erreur plutôt que de remettre le compteur à zéro. Pour modifier le total à la main, il suffit d'éditer ce fichier.
 
 ## Ajouter ou modifier un projet
 
@@ -123,7 +133,7 @@ Sur le serveur, crée un fichier `.env` à la racine avec les variables d'enviro
 docker compose -f compose.prod.yml up -d --build
 ```
 
-Le site est alors servi sur le port **8000** de la machine. Il redémarre automatiquement grâce à `restart: always`. Les variables sont injectées au build et à l'exécution : après les avoir modifiées, il faut **reconstruire** l'image (`--build`).
+Le site est alors servi sur le port **8000** de la machine. Il redémarre automatiquement grâce à `restart: always`. Le compteur de l'easter egg est conservé dans le volume Docker `portfolio-data`, qui survit aux redéploiements (mais pas à `docker compose down -v`). Les variables sont injectées au build et à l'exécution : après les avoir modifiées, il faut **reconstruire** l'image (`--build`).
 
 ## Contact
 

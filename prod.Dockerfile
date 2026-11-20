@@ -46,6 +46,11 @@ WORKDIR /app
 # Don't run production as root
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+# Dossier du compteur de l'easter egg (monté en volume par Compose)
+RUN mkdir -p /app/data && chown nextjs:nodejs /app/data
+ENV DATA_DIR=/app/data
+
 USER nextjs
 
 COPY --from=builder /app/public ./public
