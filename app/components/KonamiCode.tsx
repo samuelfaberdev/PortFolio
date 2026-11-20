@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 export default function KonamiCode() {
   useEffect(() => {
+    // Un seul écouteur au montage, retiré au démontage.
     const easterEgg = new Konami("/game");
-  });
-  return <></>;
+    return () => easterEgg.unload();
+  }, []);
+  return null;
 }

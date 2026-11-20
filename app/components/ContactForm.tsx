@@ -18,8 +18,6 @@ export default function ContactForm() {
 
     const res = await contactMeAction(token, formData);
 
-    console.log({ res });
-
     if (res.success) {
       toast.success(res.message);
       setEmailSubmitted(true);
@@ -49,6 +47,7 @@ export default function ContactForm() {
               name="email"
               id="email"
               required
+              maxLength={254}
               placeholder="nom@provider.fr"
             />
           </div>
@@ -62,11 +61,12 @@ export default function ContactForm() {
               name="subject"
               id="subject"
               required
+              maxLength={150}
               placeholder="Salut Samuel !"
             />
           </div>
           <div className="flex flex-col gap-1 w-full">
-            <label className="pl-1" htmlFor="">
+            <label className="pl-1" htmlFor="message">
               Votre message :
             </label>
             <textarea
@@ -74,6 +74,7 @@ export default function ContactForm() {
               name="message"
               id="message"
               required
+              maxLength={5000}
               placeholder="Salut Samuel, parlons un peu de ton projet..."
             ></textarea>
           </div>
