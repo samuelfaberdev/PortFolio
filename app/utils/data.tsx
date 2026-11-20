@@ -22,11 +22,11 @@ export const DATA: DATA[] = [
         </li>
         <li>
           <span className="font-bold">Data / IA :</span> Python // Pandas //
-          NumPy // scikit-learn // Deep Learning (YOLO) // NLP (spaCy)
+          NumPy // scikit-learn // Deep Learning // NLP
         </li>
         <li>
           <span className="font-bold">MLOps / Cloud :</span> FastAPI //
-          Streamlit // MLflow // Docker // Google Cloud (BigQuery)
+          Streamlit // MLflow // Docker // Google Cloud
         </li>
         <li>
           <span className="font-bold">Base de données :</span> SQL // MySQL //
@@ -98,11 +98,15 @@ export const DATA: DATA[] = [
       <ul className="list-disc pl-8">
         <li>
           Data Analyst / Data Scientist - Stage -{" "}
-          <span className="gradient-text">Datatop</span>
+          <a href="https://datatop.fr/" className="gradient-text">
+            Datatop
+          </a>
         </li>
         <li>
           DevOps / SysAdmin - Stage -{" "}
-          <span className="gradient-text">Aukfood</span>
+          <a href="https://www.aukfood.fr/" className="gradient-text">
+            Aukfood
+          </a>
         </li>
         <li>
           Teaching Assistant - Apprentissage -{" "}

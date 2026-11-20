@@ -30,13 +30,15 @@ export default function AboutSection() {
         <h2 className="text-4xl">A propos de moi</h2>
         <p>
           De formation initiale dans la maintenance industrielle puis
-          biomédicales, ainsi que de nombreux autres métiers, j&apos;ai souhaité
-          faire une reconversion dans le développement web.
+          biomédicale, et après avoir exercé de nombreux autres métiers,
+          j&apos;ai choisi de me reconvertir dans le développement web, avant
+          de poursuivre vers la Data Science et l&apos;intelligence
+          artificielle.
         </p>
         <p>
           Dans cette section vous découvrirez mes diverses compétences acquises
           au fil de ma reconversion et de mon parcours professionnel, ainsi que
-          mes différentes expériences dans le milieu du développement.
+          mes différentes expériences dans le développement et la data.
         </p>
         <div className="flex gap-4">
           <button
