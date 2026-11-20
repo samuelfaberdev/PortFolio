@@ -31,6 +31,8 @@ export const PROJECTS: Project[] = [
       "Docker",
     ],
     emoji: "🥕",
+    image: "/images/projets/master-shelf.webp",
+    demo: { url: "https://mastershelf.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/Master-Shelf",
   },
   {
