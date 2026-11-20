@@ -21,6 +21,14 @@ export const DATA: DATA[] = [
           GraphQL // TypeORM
         </li>
         <li>
+          <span className="font-bold">Data / IA :</span> Python // Pandas //
+          NumPy // scikit-learn // Deep Learning (YOLO) // NLP (spaCy)
+        </li>
+        <li>
+          <span className="font-bold">MLOps / Cloud :</span> FastAPI //
+          Streamlit // MLflow // Docker // Google Cloud (BigQuery)
+        </li>
+        <li>
           <span className="font-bold">Base de données :</span> SQL // MySQL //
           PostgreSQL // SQLite
         </li>
@@ -46,6 +54,13 @@ export const DATA: DATA[] = [
     id: "education",
     content: (
       <ul className="list-disc pl-8">
+        <li>
+          Titre RNCP niveau 6 - Concepteur Développeur en Intelligence
+          Artificielle et Analyse Big Data -{" "}
+          <a href="https://www.lewagon.com/fr" className="gradient-text">
+            Le Wagon
+          </a>
+        </li>
         <li>
           Titre RNCP niveau 6 - Concepteur Développeur d&apos;Applications -{" "}
           <a href="https://wildcodeschool.fr/" className="gradient-text">
@@ -81,6 +96,14 @@ export const DATA: DATA[] = [
     id: "experiences",
     content: (
       <ul className="list-disc pl-8">
+        <li>
+          Data Analyst / Data Scientist - Stage -{" "}
+          <span className="gradient-text">Datatop</span>
+        </li>
+        <li>
+          DevOps / SysAdmin - Stage -{" "}
+          <span className="gradient-text">Aukfood</span>
+        </li>
         <li>
           Teaching Assistant - Apprentissage -{" "}
           <a href="https://wildcodeschool.fr/" className="gradient-text">
