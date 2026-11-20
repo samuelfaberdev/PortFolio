@@ -18,9 +18,10 @@ export default function HeroSection() {
         </p>
         <p>
           Je recherche avant tout une <strong>alternance (niveau 7)</strong> ou
-          un <strong>CDI</strong> en <strong>Data Science</strong>, sur la
-          région nazairienne et nantaise, sur site, en hybride ou en
-          télétravail.
+          un <strong>CDI</strong> en <strong>Data Science</strong>, plus
+          spécifiquement en <strong>Data Engineering</strong> ou en{" "}
+          <strong>MLOps</strong>, sur la région nazairienne et nantaise, sur
+          site, en hybride ou en télétravail.
         </p>
       </article>
       <div className="flex flex-row flex-wrap lg:flex-col items-center justify-center gap-4 w-full lg:w-1/6">
