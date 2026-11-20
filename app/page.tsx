@@ -2,6 +2,7 @@ import AboutSection from "./components/AboutSection";
 import ContactSection from "./components/ContactSection";
 import HeroSection from "./components/HeroSection";
 import ProjectsSection from "./components/ProjectsSection";
+import RecommendationsSection from "./components/RecommendationsSection";
 import KonamiCode from "./components/KonamiCode";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <ProjectsSection />
+      <RecommendationsSection />
       <ContactSection />
       <KonamiCode />
     </main>

@@ -9,6 +9,7 @@ Portfolio de **Samuel Faber**, Concepteur Développeur d'Applications Web et IA,
 - **Accueil** : présentation, bouton de contact et téléchargement du CV
 - **À propos** : parcours, avec des onglets Hard Skills, Soft Skills, Formations et Expériences
 - **Mes projets** : grille de cartes avec visuel, description, technologies, lien de démo et lien vers le code
+- **Ils me recommandent** : extraits de recommandations LinkedIn ([`app/utils/recommendations.ts`](app/utils/recommendations.ts)), cités mot pour mot
 - **Contact** : disponibilité, zone géographique, liens GitHub / LinkedIn et formulaire de contact
 - **Mentions légales et confidentialité** (`/mentions-legales`) : éditeur, hébergeur, données du formulaire, traceurs, refus des statistiques
 - Un easter egg se cache aussi quelque part… 🥚
@@ -100,6 +101,7 @@ Les statistiques sont gérées par [Umami](https://umami.is/), auto-hébergé su
 | `tous-les-projets-github`       | Lien « Voir tous mes projets sur GitHub »                            |
 | `lien-github` / `lien-linkedin` | Icônes de la section Contact                                         |
 | `easter-egg-trouve`             | Première visite d'un navigateur sur la page cachée                   |
+| `recommandations-linkedin`      | Lien « Voir toutes mes recommandations sur LinkedIn »                |
 | `changement-theme`              | Bouton de thème de l'en-tête (propriété `theme` : thème choisi)      |
 
 Pour un nouveau bouton, ajouter l'attribut `data-umami-event="nom-de-l-evenement"`. Dans du code, utiliser `trackEvent()` ([`app/utils/analytics.ts`](app/utils/analytics.ts)).
