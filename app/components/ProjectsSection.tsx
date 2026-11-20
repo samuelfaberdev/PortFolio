@@ -11,7 +11,7 @@ function ProjectCard({ project }: { project: Project }) {
             alt={`Aperçu du projet ${project.title}`}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-contain p-2"
+            className="object-cover transition duration-300 group-hover:scale-105"
           />
         ) : (
           <span
