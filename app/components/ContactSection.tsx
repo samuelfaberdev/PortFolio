@@ -11,10 +11,18 @@ export default function ContactSection() {
       <div className="flex flex-col gap-4">
         <h2 className="text-4xl">Contactez-moi</h2>
         <p>
-          Je suis actuellement à la recherche de nouvelles opportunitées !<br />
+          Je suis actuellement à la recherche de nouvelles opportunités !<br />
           N&apos;hésitez pas à me contacter dès à présent via LinkedIn, GitHub
           ou par mail.
         </p>
+        <ul className="flex flex-col gap-1">
+          <li>
+            💼 <strong>Disponible</strong> pour un CDI ou une alternance (niveau
+            7)
+          </li>
+          <li>📍 Région nazairienne et nantaise</li>
+          <li>🏠 Sur site, hybride ou en télétravail</li>
+        </ul>
         <div className="flex gap-4">
           <Link href="https://github.com/samuelfaberdev">
             <Image

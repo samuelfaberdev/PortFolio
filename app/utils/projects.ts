@@ -35,9 +35,9 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "ShortURL",
-    context: "Projet perso · En production",
+    context: "Projet solo CDA · Wild Code School",
     description:
-      "Mon raccourcisseur d'URL, en ligne sur smfb.me. Front Next.js, API GraphQL typée avec TypeORM, authentification JWT et déploiement entièrement conteneurisé.",
+      "Réducteur d'URL avec tableau de bord intégré (suivi statistique et gestion des liens), en ligne sur smfb.me. Front Next.js, API GraphQL typée avec TypeORM, authentification JWT et déploiement conteneurisé.",
     stack: [
       "Next.js",
       "TypeScript",
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
     title: "Inovin",
     context: "Projet 3 · Wild Code School",
     description:
-      "Application pour un atelier de dégustation de vins : les participants découvrent les secrets de la dégustation et composent leur propre assemblage. Réalisée en équipe de six.",
+      "Application tablette et PC réalisée pour un client : un atelier de dégustation où les participants découvrent les secrets du vin et composent leur propre assemblage. Réalisée en équipe.",
     stack: ["React", "Tailwind", "Node.js", "Express", "MySQL", "JWT"],
     emoji: "🍷",
     demo: { url: "https://inovin.samuelfaber.dev/" },
@@ -62,7 +62,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "JWBook",
-    context: "Checkpoint 4 · Wild Code School",
+    context: "Projet solo · Checkpoint 4 · Wild Code School",
     description:
       "« Jurassic World : La Colo du Crétacé », un livre-jeu dont vous êtes le héros : comptes utilisateurs, navigation par chapitres et sauvegarde de la progression.",
     stack: ["React", "MUI", "Tailwind", "Express", "MySQL", "Docker"],
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     title: "Green Mobile",
     context: "Hackathon Emmaüs Connect · Wild Code School",
     description:
-      "Estimation du score et du prix de revente conseillé d'un smartphone reconditionné, à partir de ses caractéristiques techniques et de son état. Réalisé en équipe de cinq (Team Zagreb).",
+      "Estimation du score et du prix de revente conseillé d'un smartphone de seconde main, à partir de ses caractéristiques techniques et de son état. Développé de zéro en environ 60 h pour le client Emmaüs Connect, en équipe de cinq (Team Zagreb).",
     stack: ["React", "Tailwind", "Express", "MySQL", "Docker"],
     emoji: "📱",
     demo: { url: "https://zagreb.samuelfaber.dev/" },
@@ -84,8 +84,8 @@ export const PROJECTS: Project[] = [
     title: "Choîxteau",
     context: "Hackathon · Wild Code School",
     description:
-      "Hackathon sur le thème des vacances, avec pour contrainte la consommation d'une API publique : un voyage princier à l'aveugle, où l'application vous fait découvrir un château et le situe sur une carte.",
-    stack: ["React", "Vite", "Tailwind", "Google Maps API"],
+      "Développé en moins de 36 h sur le thème des vacances, avec pour contrainte la consommation d'une API publique : un voyage princier à l'aveugle, où l'application vous fait découvrir un château et le situe sur une carte.",
+    stack: ["React", "Vite", "Tailwind", "OpenTripMap", "Google Maps API"],
     emoji: "🏰",
     demo: { url: "https://choixteau-cq.netlify.app/" },
     repo: "https://github.com/samuelfaberdev/WCS-Hackathon1-Choixteau",
@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
     title: "AlloAnime",
     context: "Projet 2 · Wild Code School",
     description:
-      "Plateforme de streaming autour des animés, des plus populaires aux moins connus : recherche, catégories, synopsis et bandes-annonces, alimentée par l'API Jikan.",
+      "Plateforme de streaming d'animés dans l'esprit d'ADN ou Crunchyroll : recherche, catégories, synopsis et bandes-annonces, alimentée par l'API Jikan. Réalisée en 5 semaines.",
     stack: ["React", "SCSS", "API Jikan", "Agile Scrum"],
     emoji: "🎌",
     demo: { url: "https://wcs-projet2-allo-anime.vercel.app/" },
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
     title: "RavenFeed",
     context: "Projet 1 · Wild Code School",
     description:
-      "Réseau social de messages courts pensé mobile first : publication, réponses, likes et partages, thème sombre et couleur principale personnalisable.",
+      "Mini réseau social à la manière de Twitter, en one page et mobile first : publication, réponses, likes et partages, thème sombre et couleur personnalisable. Réalisé en 2 semaines.",
     stack: ["HTML", "CSS", "JavaScript"],
     emoji: "🐦‍⬛",
     demo: { url: "https://samuelfaberdev.github.io/WCS-Projet1-RavenFeed/" },
@@ -146,7 +146,7 @@ export const PROJECTS: Project[] = [
     // Jouable uniquement via le Konami Code (page /game), en easter egg
     unavailable: {
       label: "🥚 Easter egg caché sur ce site",
-      hint: "Indice : un célèbre code de triche… ↑ ↑ ↓ ↓ ← → ← → B A",
+      hint: "Indice : un célèbre code de triche de jeu vidéo…",
     },
     repo: "https://github.com/samuelfaberdev/Seahorse-Game",
   },
