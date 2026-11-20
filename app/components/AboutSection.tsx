@@ -16,7 +16,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section className="w-full p-4 flex justify-between gap-32">
+    <section id="a-propos" className="w-full scroll-mt-28 p-4 flex justify-between gap-32">
       <div className="w-2/6 rounded-lg">
         <Image
           className="rounded-3xl"

@@ -4,7 +4,7 @@ import ContactForm from "./ContactForm";
 
 export default function ContactSection() {
   return (
-    <section className="flex justify-between">
+    <section id="contact" className="w-full scroll-mt-28 p-4 flex justify-between">
       <div className="flex flex-col gap-4">
         <h2 className="text-4xl">Contactez-moi</h2>
         <p>
