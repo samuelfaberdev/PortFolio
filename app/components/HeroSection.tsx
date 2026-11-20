@@ -11,19 +11,32 @@ export default function HeroSection() {
           Bienvenue sur mon <strong>Portfolio</strong>.
         </h2>
         <p>
-          Issu d&apos;une reconversion dans le{" "}
-          <strong>développement web</strong>, je suis actuellement disponible
-          pour renforcer vos équipes.
+          <strong>Concepteur Développeur d&apos;Applications Web et IA</strong>,
+          je me suis reconverti dans le <strong>développement web</strong> avant
+          de poursuivre avec le Bootcamp <strong>Data Science &amp; AI</strong>{" "}
+          du Wagon.
         </p>
         <p>
-          Que ce soit en tant que développeur <strong>Frontend</strong>,{" "}
-          <strong>Backend</strong> ou <strong>Fullstack</strong>, je saurai me
-          rendre utile pour vos projets !
+          Je recherche avant tout une <strong>alternance (niveau 7)</strong> ou
+          un <strong>CDI</strong> en <strong>Data Science</strong>, sur la
+          région nazairienne et nantaise, sur site, en hybride ou en
+          télétravail. Mon expérience en développement{" "}
+          <strong>Fullstack</strong> est un vrai atout pour mettre les modèles
+          en production.
         </p>
       </article>
       <div className="flex flex-col items-center justify-center gap-4 w-1/6">
-        <button className="gradient-button">Me contacter</button>
-        <button className="gradient-button">Télécharger mon CV</button>
+        <a href="#contact" className="gradient-button">
+          Me contacter
+        </a>
+        <a
+          href="/cv/CV_Samuel_Faber.pdf"
+          download
+          target="_blank"
+          className="gradient-button"
+        >
+          Télécharger mon CV
+        </a>
       </div>
       <div className="flex items-center justify-center w-auto">
         <Image

@@ -4,14 +4,25 @@ import ContactForm from "./ContactForm";
 
 export default function ContactSection() {
   return (
-    <section className="flex justify-between">
+    <section
+      id="contact"
+      className="w-full scroll-mt-28 p-4 flex justify-between"
+    >
       <div className="flex flex-col gap-4">
         <h2 className="text-4xl">Contactez-moi</h2>
         <p>
-          Je suis actuellement à la recherche de nouvelles opportunitées !<br />
+          Je suis actuellement à la recherche de nouvelles opportunités !<br />
           N&apos;hésitez pas à me contacter dès à présent via LinkedIn, GitHub
           ou par mail.
         </p>
+        <ul className="flex flex-col gap-1">
+          <li>
+            💼 <strong>Disponible</strong> pour une alternance (niveau 7) ou un
+            CDI en Data Science
+          </li>
+          <li>📍 Région nazairienne et nantaise</li>
+          <li>🏠 Sur site, hybride ou en télétravail</li>
+        </ul>
         <div className="flex gap-4">
           <Link href="https://github.com/samuelfaberdev">
             <Image
@@ -21,7 +32,7 @@ export default function ContactSection() {
               height={48}
             />
           </Link>
-          <Link href="https://www.linkedin.com/in/samuelfaberdev/">
+          <Link href="https://www.linkedin.com/in/samuel-faber-developpeur-web-fullstack-data-scientist-nantes/">
             <Image
               src="/images/icone-linkedin.svg"
               alt="Profil LinkedIn"
