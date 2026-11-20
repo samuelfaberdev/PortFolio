@@ -32,6 +32,24 @@ function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
+        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          {project.team ? (
+            <>
+              👥{" "}
+              {project.team.size
+                ? `Projet en équipe de ${project.team.size}`
+                : "Projet en équipe"}
+              {" · "}
+              <strong className="text-neutral-800 dark:text-neutral-200">
+                Mon rôle :
+              </strong>{" "}
+              {project.team.role}
+            </>
+          ) : (
+            "👤 Projet réalisé seul"
+          )}
+        </p>
+
         <ul className="flex flex-wrap gap-2" aria-label="Technologies">
           {project.stack.map((tech) => (
             <li
