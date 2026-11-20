@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "./Navbar";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
@@ -17,7 +18,10 @@ export default function Header() {
           <p className="gradient-text">samuelfaber.dev</p>
         </span>
       </Link>
-      <Navbar />
+      <div className="flex items-center gap-2 md:gap-4">
+        <Navbar />
+        <ThemeToggle />
+      </div>
     </header>
   );
 }

@@ -12,7 +12,7 @@ Portfolio de **Samuel Faber**, Concepteur Développeur d'Applications Web et IA,
 - **Contact** : disponibilité, zone géographique, liens GitHub / LinkedIn et formulaire de contact
 - Un easter egg se cache aussi quelque part… 🥚
 
-Le site est responsive (mobile, tablette, ordinateur) et suit le thème clair ou sombre du système.
+Le site est responsive (mobile, tablette, ordinateur). Un bouton dans l'en-tête permet de choisir le thème : automatique (selon le système), clair ou sombre. Le choix est mémorisé dans le navigateur ([`app/utils/theme.ts`](app/utils/theme.ts)).
 
 ## Stack technique
 
@@ -98,6 +98,7 @@ Les statistiques sont gérées par [Umami](https://umami.is/), auto-hébergé su
 | `tous-les-projets-github`       | Lien « Voir tous mes projets sur GitHub »                            |
 | `lien-github` / `lien-linkedin` | Icônes de la section Contact                                         |
 | `easter-egg-trouve`             | Première visite d'un navigateur sur la page cachée                   |
+| `changement-theme`              | Bouton de thème de l'en-tête (propriété `theme` : thème choisi)      |
 
 Pour un nouveau bouton, ajouter l'attribut `data-umami-event="nom-de-l-evenement"`. Dans du code, utiliser `trackEvent()` ([`app/utils/analytics.ts`](app/utils/analytics.ts)).
 
