@@ -19,7 +19,7 @@ const geistMono = localFont({
 });
 
 const SITE_URL = "https://samuelfaber.dev";
-const SITE_TITLE = "Samuel Faber · Développeur Web & Data Science";
+const SITE_TITLE = "Samuel Faber · Développeur IA, Data Engineering & MLOps";
 const SITE_DESCRIPTION =
   "Portfolio de Samuel Faber, concepteur développeur d'applications web et IA : projets, parcours et contact. En recherche d'une alternance ou d'un CDI en Data Engineering ou MLOps, région nantaise.";
 
