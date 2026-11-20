@@ -32,6 +32,24 @@ function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
 
+        <div className="flex flex-col gap-1 text-sm text-neutral-600 dark:text-neutral-400">
+          <p>
+            {project.team
+              ? project.team.size
+                ? `👥 Projet en équipe de ${project.team.size}`
+                : "👥 Projet en équipe"
+              : "👤 Projet réalisé seul"}
+          </p>
+          {project.team && (
+            <p>
+              <strong className="text-neutral-800 dark:text-neutral-200">
+                Mon rôle :
+              </strong>{" "}
+              {project.team.role}
+            </p>
+          )}
+        </div>
+
         <ul className="flex flex-wrap gap-2" aria-label="Technologies">
           {project.stack.map((tech) => (
             <li
@@ -90,9 +108,9 @@ export default function ProjectsSection() {
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl lg:text-4xl">Mes projets</h2>
         <p>
-          Projets de formation, hackathons, projets perso et quelques jeux :
-          voici une sélection de ce que j&apos;ai construit, du front au back en
-          passant par la data.
+          Projets de formation, hackathons, projets perso et quelques jeux,
+          réalisés seul ou en équipe : voici une sélection de ce que j&apos;ai
+          construit, du front au back en passant par la data.
         </p>
       </div>
 

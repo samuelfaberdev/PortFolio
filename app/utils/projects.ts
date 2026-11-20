@@ -12,6 +12,8 @@ export type Project = {
   /** Texte du badge non cliquable affiché quand il n'y a pas de démo */
   unavailable?: { label: string; hint?: string };
   repo?: string;
+  /** Projet d'équipe : taille (si connue) et rôle. Absent = projet réalisé seul. */
+  team?: { size?: number; role: string };
 };
 
 // L'ordre de ce tableau est l'ordre d'affichage sur le site.
@@ -34,6 +36,10 @@ export const PROJECTS: Project[] = [
     image: "/images/projets/master-shelf.webp",
     demo: { url: "https://mastershelf.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/Master-Shelf",
+    team: {
+      size: 4,
+      role: "entraînement du modèle YOLO, API FastAPI, MLOps, référent débogage de l'équipe",
+    },
   },
   {
     title: "ShortURL",
@@ -57,12 +63,16 @@ export const PROJECTS: Project[] = [
     title: "Inovin",
     context: "Projet 3 · Wild Code School",
     description:
-      "Application tablette et PC réalisée pour un client : un atelier de dégustation où les participants découvrent les secrets du vin et composent leur propre assemblage. Réalisée en équipe.",
+      "Application tablette et PC réalisée pour un client : un atelier de dégustation où les participants découvrent les secrets du vin et composent leur propre assemblage.",
     stack: ["React", "Tailwind", "Node.js", "Express", "MySQL", "JWT"],
     emoji: "🍷",
     image: "/images/projets/inovin.webp",
     demo: { url: "https://inovin.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/WCS-Projet3-Inovin",
+    team: {
+      size: 6,
+      role: "lead du projet, référent débogage de l'équipe, formulaire de dégustation",
+    },
   },
   {
     title: "JWBook",
@@ -78,12 +88,16 @@ export const PROJECTS: Project[] = [
     title: "Green Mobile",
     context: "Hackathon Emmaüs Connect · Wild Code School",
     description:
-      "Estimation du score et du prix de revente conseillé d'un smartphone de seconde main, à partir de ses caractéristiques techniques et de son état. Développé de zéro en environ 60 h pour le client Emmaüs Connect, en équipe de cinq (Team Zagreb).",
+      "Estimation du score et du prix de revente conseillé d'un smartphone de seconde main, à partir de ses caractéristiques techniques et de son état. Développé de zéro en environ 60 h pour le client Emmaüs Connect (Team Zagreb).",
     stack: ["React", "Tailwind", "Express", "MySQL", "Docker"],
     emoji: "📱",
     image: "/images/projets/green-mobile.webp",
     demo: { url: "https://zagreb.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/WCS-Hackathon2-Team-Zagreb",
+    team: {
+      size: 5,
+      role: "lead du projet, algorithme de calcul du score et du prix, référent débogage de l'équipe",
+    },
   },
   {
     title: "Choîxteau",
@@ -95,6 +109,10 @@ export const PROJECTS: Project[] = [
     image: "/images/projets/choixteau.webp",
     demo: { url: "https://choixteau-cq.netlify.app/" },
     repo: "https://github.com/samuelfaberdev/WCS-Hackathon1-Choixteau",
+    team: {
+      size: 5,
+      role: "lead du projet, intégration des API (dont Google Maps), référent débogage de l'équipe",
+    },
   },
   {
     title: "AlloAnime",
@@ -106,6 +124,10 @@ export const PROJECTS: Project[] = [
     image: "/images/projets/alloanime.webp",
     demo: { url: "https://wcs-projet2-allo-anime.vercel.app/" },
     repo: "https://github.com/samuelfaberdev/WCS-Projet2-AlloAnime",
+    team: {
+      size: 4,
+      role: "lead du projet, intégration de l'API, référent débogage de l'équipe, carrousel, une bonne partie du CSS",
+    },
   },
   {
     title: "RavenFeed",
@@ -117,6 +139,10 @@ export const PROJECTS: Project[] = [
     image: "/images/projets/ravenfeed.webp",
     demo: { url: "https://samuelfaberdev.github.io/WCS-Projet1-RavenFeed/" },
     repo: "https://github.com/samuelfaberdev/WCS-Projet1-RavenFeed",
+    team: {
+      size: 3,
+      role: "intégration du fil de messages principal, référent débogage de l'équipe",
+    },
   },
   {
     title: "Jolly Roger Clock",
