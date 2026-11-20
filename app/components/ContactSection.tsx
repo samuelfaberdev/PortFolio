@@ -17,8 +17,8 @@ export default function ContactSection() {
         </p>
         <ul className="flex flex-col gap-1">
           <li>
-            💼 <strong>Disponible</strong> pour un CDI ou une alternance (niveau
-            7)
+            💼 <strong>Disponible</strong> pour une alternance (niveau 7) ou un
+            CDI en Data Science
           </li>
           <li>📍 Région nazairienne et nantaise</li>
           <li>🏠 Sur site, hybride ou en télétravail</li>

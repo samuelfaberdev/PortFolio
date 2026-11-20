@@ -17,11 +17,12 @@ export default function HeroSection() {
           du Wagon.
         </p>
         <p>
-          Je recherche un <strong>CDI</strong> ou une{" "}
-          <strong>alternance (niveau 7)</strong> en{" "}
-          <strong>Data Science</strong> ou en développement{" "}
-          <strong>Fullstack</strong>, sur la région nazairienne et nantaise, sur
-          site, en hybride ou en télétravail.
+          Je recherche avant tout une <strong>alternance (niveau 7)</strong> ou
+          un <strong>CDI</strong> en <strong>Data Science</strong>, sur la
+          région nazairienne et nantaise, sur site, en hybride ou en
+          télétravail. Mon expérience en développement{" "}
+          <strong>Fullstack</strong> est un vrai atout pour mettre les modèles
+          en production.
         </p>
       </article>
       <div className="flex flex-col items-center justify-center gap-4 w-1/6">
