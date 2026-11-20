@@ -9,6 +9,8 @@ export type Project = {
   /** Chemin dans /public, ex. "/images/projets/shorturl.png" */
   image?: string;
   demo?: { url: string; label?: string };
+  /** Texte du badge non cliquable affiché quand il n'y a pas de démo */
+  unavailable?: { label: string; hint?: string };
   repo?: string;
 };
 
@@ -19,7 +21,15 @@ export const PROJECTS: Project[] = [
     context: "Projet Data Science · Le Wagon",
     description:
       "À partir d'une photo et d'une liste d'ingrédients, l'application détecte ce que l'on a sous la main (YOLO) et recommande des recettes réalisables sans faire les courses, grâce à un système de recommandation par plus proches voisins.",
-    stack: ["Python", "FastAPI", "Streamlit", "YOLO", "scikit-learn", "BigQuery", "Docker"],
+    stack: [
+      "Python",
+      "FastAPI",
+      "Streamlit",
+      "YOLO",
+      "scikit-learn",
+      "BigQuery",
+      "Docker",
+    ],
     emoji: "🥕",
     repo: "https://github.com/samuelfaberdev/Master-Shelf",
   },
@@ -28,7 +38,14 @@ export const PROJECTS: Project[] = [
     context: "Projet perso · En production",
     description:
       "Mon raccourcisseur d'URL, en ligne sur smfb.me. Front Next.js, API GraphQL typée avec TypeORM, authentification JWT et déploiement entièrement conteneurisé.",
-    stack: ["Next.js", "TypeScript", "GraphQL", "TypeORM", "PostgreSQL", "Docker"],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "GraphQL",
+      "TypeORM",
+      "PostgreSQL",
+      "Docker",
+    ],
     emoji: "🔗",
     demo: { url: "https://smfb.me/" },
     repo: "https://github.com/samuelfaberdev/ShortURL",
@@ -114,7 +131,10 @@ export const PROJECTS: Project[] = [
       "Un jeu-cadeau sur mesure : il faut aller jusqu'au bout de la partie pour découvrir la surprise qui se cache à la fin.",
     stack: ["HTML", "CSS", "JavaScript"],
     emoji: "🎁",
-    demo: { url: "https://samuelfaberdev.github.io/Cadeau-Morgane/", label: "Jouer" },
+    demo: {
+      url: "https://samuelfaberdev.github.io/Cadeau-Morgane/",
+      label: "Jouer",
+    },
   },
   {
     title: "SeaHorse Game",
@@ -123,7 +143,11 @@ export const PROJECTS: Project[] = [
       "Shoot'em up steampunk en side-scrolling dessiné en Canvas : flèches pour se déplacer, espace pour tirer. Réalisé en suivant un tutoriel pendant mon stage.",
     stack: ["JavaScript", "Canvas"],
     emoji: "🌊",
-    demo: { url: "https://samuelfaberdev.github.io/Seahorse-Game/", label: "Jouer" },
+    // Jouable uniquement via le Konami Code (page /game), en easter egg
+    unavailable: {
+      label: "🥚 Easter egg caché sur ce site",
+      hint: "Indice : un célèbre code de triche… ↑ ↑ ↓ ↓ ← → ← → B A",
+    },
     repo: "https://github.com/samuelfaberdev/Seahorse-Game",
   },
 ];

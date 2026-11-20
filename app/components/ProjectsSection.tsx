@@ -28,7 +28,9 @@ function ProjectCard({ project }: { project: Project }) {
           {project.context}
         </p>
         <h3 className="text-2xl font-bold">{project.title}</h3>
-        <p className="flex-1 text-neutral-700 dark:text-neutral-300">{project.description}</p>
+        <p className="flex-1 text-neutral-700 dark:text-neutral-300">
+          {project.description}
+        </p>
 
         <ul className="flex flex-wrap gap-2" aria-label="Technologies">
           {project.stack.map((tech) => (
@@ -52,8 +54,11 @@ function ProjectCard({ project }: { project: Project }) {
               {project.demo.label ?? "Voir le site"}
             </a>
           ) : (
-            <span className="rounded-full border border-dashed border-neutral-300 dark:border-neutral-700 px-5 py-2.5 text-sm text-neutral-500 dark:text-neutral-400 me-2 mb-2">
-              Pas encore en ligne
+            <span
+              title={project.unavailable?.hint}
+              className="cursor-default rounded-full border border-dashed border-neutral-300 dark:border-neutral-700 px-5 py-2.5 text-sm text-neutral-500 dark:text-neutral-400 me-2 mb-2"
+            >
+              {project.unavailable?.label ?? "Pas encore en ligne"}
             </span>
           )}
           {project.repo && (
@@ -74,13 +79,16 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function ProjectsSection() {
   return (
-    <section id="projets" className="w-full scroll-mt-28 p-4 flex flex-col gap-8">
+    <section
+      id="projets"
+      className="w-full scroll-mt-28 p-4 flex flex-col gap-8"
+    >
       <div className="flex flex-col gap-4">
         <h2 className="text-4xl">Mes projets</h2>
         <p>
           Projets de formation, hackathons, projets perso et quelques jeux :
-          voici une sélection de ce que j&apos;ai construit, du front au back
-          en passant par la data.
+          voici une sélection de ce que j&apos;ai construit, du front au back en
+          passant par la data.
         </p>
       </div>
 
