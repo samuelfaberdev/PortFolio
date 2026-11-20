@@ -90,9 +90,9 @@ export default function ProjectsSection() {
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl lg:text-4xl">Mes projets</h2>
         <p>
-          Projets de formation, hackathons, projets perso et quelques jeux :
-          voici une sélection de ce que j&apos;ai construit, du front au back en
-          passant par la data.
+          Projets de formation, hackathons, projets perso et quelques jeux,
+          réalisés seul ou en équipe : voici une sélection de ce que j&apos;ai
+          construit, du front au back en passant par la data.
         </p>
       </div>
 
