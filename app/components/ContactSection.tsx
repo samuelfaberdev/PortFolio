@@ -6,10 +6,10 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full scroll-mt-28 p-4 flex justify-between"
+      className="w-full scroll-mt-20 md:scroll-mt-28 p-4 flex flex-col lg:flex-row justify-between gap-8"
     >
       <div className="flex flex-col gap-4">
-        <h2 className="text-4xl">Contactez-moi</h2>
+        <h2 className="text-3xl lg:text-4xl">Contactez-moi</h2>
         <p>
           Je suis actuellement à la recherche de nouvelles opportunités !<br />
           N&apos;hésitez pas à me contacter dès à présent via LinkedIn, GitHub

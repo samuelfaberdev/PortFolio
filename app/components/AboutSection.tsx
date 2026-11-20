@@ -16,8 +16,11 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="a-propos" className="w-full scroll-mt-28 p-4 flex justify-between gap-32">
-      <div className="w-2/6 rounded-lg">
+    <section
+      id="a-propos"
+      className="w-full scroll-mt-20 md:scroll-mt-28 p-4 flex flex-col lg:flex-row justify-between gap-8 lg:gap-32"
+    >
+      <div className="w-full max-w-sm mx-auto lg:mx-0 lg:max-w-none lg:w-2/6 rounded-lg">
         <Image
           className="rounded-3xl"
           src={"/images/bureau.jpg"}
@@ -26,21 +29,20 @@ export default function AboutSection() {
           height={400}
         />
       </div>
-      <article className="flex flex-col gap-4 w-4/6">
-        <h2 className="text-4xl">A propos de moi</h2>
+      <article className="flex flex-col gap-4 w-full lg:w-4/6">
+        <h2 className="text-3xl lg:text-4xl">A propos de moi</h2>
         <p>
           De formation initiale dans la maintenance industrielle puis
           biomédicale, et après avoir exercé de nombreux autres métiers,
-          j&apos;ai choisi de me reconvertir dans le développement web, avant
-          de poursuivre vers la Data Science et l&apos;intelligence
-          artificielle.
+          j&apos;ai choisi de me reconvertir dans le développement web, avant de
+          poursuivre vers la Data Science et l&apos;intelligence artificielle.
         </p>
         <p>
           Dans cette section vous découvrirez mes diverses compétences acquises
           au fil de ma reconversion et de mon parcours professionnel, ainsi que
           mes différentes expériences dans le développement et la data.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-x-4 gap-y-2">
           <button
             className="font-bold"
             onClick={() => handleTabChange("hardskills")}

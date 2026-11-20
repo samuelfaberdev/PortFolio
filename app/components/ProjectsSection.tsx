@@ -81,10 +81,10 @@ export default function ProjectsSection() {
   return (
     <section
       id="projets"
-      className="w-full scroll-mt-28 p-4 flex flex-col gap-8"
+      className="w-full scroll-mt-20 md:scroll-mt-28 p-4 flex flex-col gap-8"
     >
       <div className="flex flex-col gap-4">
-        <h2 className="text-4xl">Mes projets</h2>
+        <h2 className="text-3xl lg:text-4xl">Mes projets</h2>
         <p>
           Projets de formation, hackathons, projets perso et quelques jeux :
           voici une sélection de ce que j&apos;ai construit, du front au back en
