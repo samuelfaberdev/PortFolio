@@ -34,6 +34,7 @@ export default function HeroSection() {
           download
           target="_blank"
           className="gradient-button"
+          data-umami-event="telechargement-cv"
         >
           Télécharger mon CV
         </a>

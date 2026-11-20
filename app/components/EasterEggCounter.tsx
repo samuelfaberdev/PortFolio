@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "../utils/analytics";
 
 type CounterData = { count: number; alreadyCounted: boolean };
 
@@ -19,7 +20,10 @@ export default function EasterEggCounter() {
     fetch("/api/easter-egg", { method: "POST" })
       .then((res) => (res.ok ? res.json() : null))
       .then((json: CounterData | null) => {
-        if (json && typeof json.count === "number") setData(json);
+        if (json && typeof json.count === "number") {
+          setData(json);
+          if (!json.alreadyCounted) trackEvent("easter-egg-trouve");
+        }
       })
       .catch(() => {
         // Compteur indisponible : on n'affiche simplement rien.

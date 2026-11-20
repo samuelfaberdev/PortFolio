@@ -50,6 +50,8 @@ function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               className="gradient-button"
+              data-umami-event="projet-demo"
+              data-umami-event-projet={project.title}
             >
               {project.demo.label ?? "Voir le site"}
             </a>
@@ -66,6 +68,8 @@ function ProjectCard({ project }: { project: Project }) {
               href={project.repo}
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="projet-code"
+              data-umami-event-projet={project.title}
               className="rounded-full border-2 border-neutral-300 dark:border-neutral-700 px-5 py-2 text-sm font-medium transition hover:border-pink-500 me-2 mb-2"
             >
               Code
@@ -100,6 +104,7 @@ export default function ProjectsSection() {
 
       <a
         href="https://github.com/samuelfaberdev?tab=repositories"
+        data-umami-event="tous-les-projets-github"
         target="_blank"
         rel="noopener noreferrer"
         className="self-center gradient-text text-lg font-bold transition hover:opacity-80"
