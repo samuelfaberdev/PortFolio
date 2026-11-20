@@ -4,7 +4,10 @@ import ContactForm from "./ContactForm";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="w-full scroll-mt-28 p-4 flex justify-between">
+    <section
+      id="contact"
+      className="w-full scroll-mt-28 p-4 flex justify-between"
+    >
       <div className="flex flex-col gap-4">
         <h2 className="text-4xl">Contactez-moi</h2>
         <p>
@@ -21,7 +24,7 @@ export default function ContactSection() {
               height={48}
             />
           </Link>
-          <Link href="https://www.linkedin.com/in/samuelfaberdev/">
+          <Link href="https://www.linkedin.com/in/samuel-faber-developpeur-web-fullstack-data-scientist-nantes/">
             <Image
               src="/images/icone-linkedin.svg"
               alt="Profil LinkedIn"
