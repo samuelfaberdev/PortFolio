@@ -24,7 +24,10 @@ export default function ContactSection() {
           <li>🏠 Sur site, hybride ou en télétravail</li>
         </ul>
         <div className="flex gap-4">
-          <Link href="https://github.com/samuelfaberdev">
+          <Link
+            href="https://github.com/samuelfaberdev"
+            data-umami-event="lien-github"
+          >
             <Image
               src="/images/icone-github.svg"
               alt="Profil GitHub"
@@ -32,7 +35,10 @@ export default function ContactSection() {
               height={48}
             />
           </Link>
-          <Link href="https://www.linkedin.com/in/samuel-faber-developpeur-web-fullstack-data-scientist-nantes/">
+          <Link
+            href="https://www.linkedin.com/in/samuel-faber-developpeur-web-fullstack-data-scientist-nantes/"
+            data-umami-event="lien-linkedin"
+          >
             <Image
               src="/images/icone-linkedin.svg"
               alt="Profil LinkedIn"

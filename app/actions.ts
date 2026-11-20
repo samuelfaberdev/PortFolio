@@ -24,7 +24,7 @@ function readField(formData: FormData, name: string) {
 
 export async function contactMeAction(
   token: string | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionResult> {
   if (!token) {
     return { success: false, message: "Token non trouvé." };

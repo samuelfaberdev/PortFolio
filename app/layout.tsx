@@ -37,6 +37,16 @@ export default function RootLayout({
           strategy="beforeInteractive"
           src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY}`}
         />
+        {process.env.NEXT_PUBLIC_UMAMI_URL &&
+          process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+            <Script
+              strategy="afterInteractive"
+              src={`${process.env.NEXT_PUBLIC_UMAMI_URL}/script.js`}
+              data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+              data-domains="samuelfaber.dev"
+              data-do-not-track="true"
+            />
+          )}
         <ToastProvider>
           <Header />
           {children}

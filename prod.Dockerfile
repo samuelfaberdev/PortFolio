@@ -28,6 +28,11 @@ ARG NEXT_PUBLIC_CAPTCHA_SITE_KEY
 ENV NEXT_PUBLIC_CAPTCHA_SITE_KEY=${NEXT_PUBLIC_CAPTCHA_SITE_KEY}
 ARG CAPTCHA_SECRET_KEY
 ENV CAPTCHA_SECRET_KEY=${CAPTCHA_SECRET_KEY}
+# Statistiques Umami (facultatif, intégré au build)
+ARG NEXT_PUBLIC_UMAMI_URL
+ENV NEXT_PUBLIC_UMAMI_URL=${NEXT_PUBLIC_UMAMI_URL}
+ARG NEXT_PUBLIC_UMAMI_WEBSITE_ID
+ENV NEXT_PUBLIC_UMAMI_WEBSITE_ID=${NEXT_PUBLIC_UMAMI_WEBSITE_ID}
 
 # Next.js collects completely anonymous telemetry data about general usage. Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line to disable telemetry at build time

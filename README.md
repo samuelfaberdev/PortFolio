@@ -60,6 +60,8 @@ Elles sont listées dans [`.env.sample`](.env.sample).
 | `NEXT_PUBLIC_CAPTCHA_SITE_KEY` | Clé de site reCAPTCHA v3 (publique, utilisée côté navigateur)                                  |
 | `CAPTCHA_SECRET_KEY`           | Clé secrète reCAPTCHA v3 (utilisée côté serveur)                                               |
 | `DATA_DIR`                     | Facultatif. Dossier du compteur de l'easter egg (par défaut `./data`, `/app/data` dans Docker) |
+| `NEXT_PUBLIC_UMAMI_URL`        | Facultatif. Adresse de l'instance Umami, ex. `https://stats.samuelfaber.dev`                   |
+| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | Facultatif. Identifiant du site dans Umami. Sans ces deux variables, aucun suivi               |
 
 Sans ces variables, le site s'affiche normalement, mais l'envoi du formulaire échoue. Pour tester le captcha en local, ajoute `localhost` aux domaines autorisés dans la [console reCAPTCHA](https://www.google.com/recaptcha/admin).
 
@@ -81,6 +83,35 @@ La page cachée affiche le nombre de personnes qui l'ont trouvée. Au chargement
 - une **visite suivante** du même navigateur renvoie le total sans l'incrémenter.
 
 Le total est stocké dans `DATA_DIR/easter-egg-visits.json` ([`app/utils/visitCounter.ts`](app/utils/visitCounter.ts)). Les écritures sont atomiques et passent l'une après l'autre. Si le fichier est corrompu, l'API renvoie une erreur plutôt que de remettre le compteur à zéro. Pour modifier le total à la main, il suffit d'éditer ce fichier.
+
+## Statistiques de visite (Umami)
+
+Les statistiques sont gérées par [Umami](https://umami.is/), auto-hébergé sur le serveur : pas de cookie, pas de données transmises à un tiers, pas de bandeau de consentement. Le script n'est chargé que si `NEXT_PUBLIC_UMAMI_URL` et `NEXT_PUBLIC_UMAMI_WEBSITE_ID` sont définies au **build**. Il ne compte que les visites sur `samuelfaber.dev` (jamais en local) et respecte le réglage « Do Not Track » du navigateur.
+
+### Événements suivis
+
+| Événement                       | Déclencheur                                                          |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `telechargement-cv`             | Bouton « Télécharger mon CV »                                        |
+| `formulaire-contact-envoye`     | Message envoyé avec succès                                           |
+| `projet-demo` / `projet-code`   | Boutons « Voir le site » / « Code » d'une carte (propriété `projet`) |
+| `tous-les-projets-github`       | Lien « Voir tous mes projets sur GitHub »                            |
+| `lien-github` / `lien-linkedin` | Icônes de la section Contact                                         |
+| `easter-egg-trouve`             | Première visite d'un navigateur sur la page cachée                   |
+
+Pour un nouveau bouton, ajouter l'attribut `data-umami-event="nom-de-l-evenement"`. Dans du code, utiliser `trackEvent()` ([`app/utils/analytics.ts`](app/utils/analytics.ts)).
+
+Pour savoir d'où viennent les visiteurs, partager des liens avec un paramètre `utm_source`, par exemple `https://samuelfaber.dev/?utm_source=cv`, `?utm_source=linkedin` ou `?utm_source=github`.
+
+### Installation sur le serveur
+
+La configuration se trouve dans [`analytics/`](analytics/) :
+
+1. Créer les secrets : `cp analytics/.env.sample analytics/.env`, puis remplir chaque valeur avec `openssl rand -hex 32`.
+2. Lancer Umami : `docker compose -f analytics/compose.yml up -d`. Il écoute sur `127.0.0.1:8600`, donc il n'est pas accessible directement depuis Internet.
+3. Ajouter le bloc de [`analytics/Caddyfile.example`](analytics/Caddyfile.example) au Caddyfile, puis recharger Caddy. Le sous-domaine `stats.samuelfaber.dev` doit pointer vers le serveur (enregistrement DNS A ou AAAA).
+4. Se connecter sur `https://stats.samuelfaber.dev` (identifiants par défaut `admin` / `umami`, à changer à la première connexion), puis ajouter le site `samuelfaber.dev` et copier son identifiant.
+5. Ajouter `NEXT_PUBLIC_UMAMI_URL` et `NEXT_PUBLIC_UMAMI_WEBSITE_ID` au `.env` du portfolio, puis reconstruire : `docker compose -f compose.prod.yml up -d --build`.
 
 ## Ajouter ou modifier un projet
 

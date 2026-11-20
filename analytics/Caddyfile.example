@@ -1,0 +1,11 @@
+# À ajouter au Caddyfile du serveur, puis : sudo systemctl reload caddy
+# (ou : docker exec <conteneur-caddy> caddy reload --config /etc/caddy/Caddyfile)
+#
+# Si Caddy tourne lui-même dans Docker, 127.0.0.1 désigne son propre conteneur :
+# remplacer par host.docker.internal:8600, ou mettre Caddy et Umami sur le même
+# réseau Docker et utiliser umami:3000.
+
+stats.samuelfaber.dev {
+	encode gzip
+	reverse_proxy 127.0.0.1:8600
+}

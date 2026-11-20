@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
+import { trackEvent } from "../utils/analytics";
 import { contactMeAction } from "../actions";
 import { generateToken } from "../utils/captcha";
 
@@ -21,6 +22,7 @@ export default function ContactForm() {
     if (res.success) {
       toast.success(res.message);
       setEmailSubmitted(true);
+      trackEvent("formulaire-contact-envoye");
     }
     if (!res.success) {
       toast.error(res.message);
