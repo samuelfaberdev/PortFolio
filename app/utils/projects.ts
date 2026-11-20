@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/samuelfaberdev/Master-Shelf",
     team: {
       size: 4,
-      role: "API FastAPI, MLOps, entraînement du modèle YOLO, référent débogage de l'équipe",
+      role: "entraînement du modèle YOLO, API FastAPI, MLOps, référent débogage de l'équipe",
     },
   },
   {
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/samuelfaberdev/WCS-Projet3-Inovin",
     team: {
       size: 6,
-      role: "lead du projet, formulaire de dégustation, référent débogage de l'équipe",
+      role: "lead du projet, référent débogage de l'équipe, formulaire de dégustation",
     },
   },
   {
@@ -111,7 +111,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/samuelfaberdev/WCS-Hackathon1-Choixteau",
     team: {
       size: 5,
-      role: "lead du projet, intégrations (dont Google Maps), référent débogage de l'équipe",
+      role: "lead du projet, intégration des API (dont Google Maps), référent débogage de l'équipe",
     },
   },
   {
@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
     repo: "https://github.com/samuelfaberdev/WCS-Projet2-AlloAnime",
     team: {
       size: 4,
-      role: "lead du projet, carrousel, intégration de l'API, une bonne partie du CSS, référent débogage de l'équipe",
+      role: "lead du projet, intégration de l'API, référent débogage de l'équipe, carrousel, une bonne partie du CSS",
     },
   },
   {
