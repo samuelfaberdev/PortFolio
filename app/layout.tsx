@@ -18,10 +18,38 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const SITE_URL = "https://samuelfaber.dev";
+const SITE_TITLE = "Samuel Faber · Développeur Web & Data Science";
+const SITE_DESCRIPTION =
+  "Portfolio de Samuel Faber, concepteur développeur d'applications web et IA : projets, parcours et contact. En recherche d'une alternance ou d'un CDI en Data Science, région nantaise.";
+
 export const metadata: Metadata = {
-  title: "PortFolio de Samuel Faber",
-  description:
-    "Développeur web créatif, je transforme vos idées en solutions digitales élégantes et performantes. Découvrez mes réalisations.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  // Aperçu des liens partagés (Facebook, LinkedIn, Messenger, WhatsApp…)
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "/",
+    siteName: "samuelfaber.dev",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Samuel Faber, concepteur développeur d'applications web et IA, en recherche d'alternance ou de CDI en Data Science",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
