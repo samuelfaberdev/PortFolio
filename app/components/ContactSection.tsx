@@ -18,7 +18,8 @@ export default function ContactSection() {
         <ul className="flex flex-col gap-1">
           <li>
             💼 <strong>Disponible</strong> pour une alternance (niveau 7) ou un
-            CDI en Data Science
+            CDI en Data Science, plus spécifiquement en Data Engineering ou en
+            MLOps
           </li>
           <li>📍 Région nazairienne et nantaise</li>
           <li>🏠 Sur site, hybride ou en télétravail</li>
