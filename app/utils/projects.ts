@@ -69,7 +69,6 @@ export const PROJECTS: Project[] = [
       "« Jurassic World : La Colo du Crétacé », un livre-jeu dont vous êtes le héros : comptes utilisateurs, navigation par chapitres et sauvegarde de la progression.",
     stack: ["React", "MUI", "Tailwind", "Express", "MySQL", "Docker"],
     emoji: "🦖",
-    image: "/images/projets/jwbook.webp",
     demo: { url: "https://jwbook.samuelfaber.dev/" },
     repo: "https://github.com/samuelfaberdev/CheckPoint4-JWBook",
   },
