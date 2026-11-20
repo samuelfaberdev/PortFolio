@@ -2,12 +2,12 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <section className="w-full p-4 flex items-center justify-between gap-8">
-      <article className="flex flex-col gap-4 w-3/6">
-        <h1 className="text-5xl gradient-text">
+    <section className="w-full p-4 flex flex-col lg:flex-row items-center justify-between gap-8">
+      <article className="flex flex-col gap-4 w-full lg:w-3/6">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl gradient-text">
           Hello, world ! Moi c&apos;est <strong>Samuel</strong> !
         </h1>
-        <h2 className="text-4xl">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl">
           Bienvenue sur mon <strong>Portfolio</strong>.
         </h2>
         <p>
@@ -25,7 +25,7 @@ export default function HeroSection() {
           en production.
         </p>
       </article>
-      <div className="flex flex-col items-center justify-center gap-4 w-1/6">
+      <div className="flex flex-row flex-wrap lg:flex-col items-center justify-center gap-4 w-full lg:w-1/6">
         <a href="#contact" className="gradient-button">
           Me contacter
         </a>
@@ -38,9 +38,9 @@ export default function HeroSection() {
           Télécharger mon CV
         </a>
       </div>
-      <div className="flex items-center justify-center w-auto">
+      <div className="order-first lg:order-none flex items-center justify-center w-auto">
         <Image
-          className="rounded-full h-80 w-80"
+          className="rounded-full h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
           src="/images/profil.jpg"
           alt="Ma photo de profil"
           width={320}

@@ -28,7 +28,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="flex items-center justify-center w-1/2">
+    <div className="flex items-center justify-center w-full lg:w-1/2">
       {emailSubmitted ? (
         <p className="text-green-500">Message envoyé avec succès !</p>
       ) : (
