@@ -5,6 +5,7 @@ import { useState } from "react";
 const LINKS = [
   { href: "/#a-propos", label: "A propos" },
   { href: "/#projets", label: "Mes projets" },
+  { href: "/#recommandations", label: "Recommandations" },
   { href: "/#contact", label: "Contact" },
 ];
 
@@ -14,7 +15,7 @@ export default function Navbar() {
   return (
     <nav>
       {/* Ordinateur et tablette */}
-      <ul className="hidden md:flex text-xl lg:text-2xl gap-6 lg:gap-8">
+      <ul className="hidden lg:flex text-xl xl:text-2xl gap-6 xl:gap-8 whitespace-nowrap">
         {LINKS.map((link) => (
           <li key={link.href}>
             <a href={link.href} className="transition hover:opacity-70">
@@ -27,7 +28,7 @@ export default function Navbar() {
       {/* Mobile : menu burger */}
       <button
         type="button"
-        className="md:hidden p-2 rounded-lg transition hover:opacity-70"
+        className="lg:hidden p-2 rounded-lg transition hover:opacity-70"
         aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
         aria-expanded={open}
         aria-controls="menu-mobile"
@@ -54,7 +55,7 @@ export default function Navbar() {
       {open && (
         <ul
           id="menu-mobile"
-          className="md:hidden absolute top-full left-0 w-full flex flex-col border-b-2 border-neutral-800 bg-[var(--background)] text-xl"
+          className="lg:hidden absolute top-full left-0 w-full flex flex-col border-b-2 border-neutral-800 bg-[var(--background)] text-xl"
         >
           {LINKS.map((link) => (
             <li key={link.href}>
