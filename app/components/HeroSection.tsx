@@ -20,9 +20,7 @@ export default function HeroSection() {
           Je recherche avant tout une <strong>alternance (niveau 7)</strong> ou
           un <strong>CDI</strong> en <strong>Data Science</strong>, sur la
           région nazairienne et nantaise, sur site, en hybride ou en
-          télétravail. Mon expérience en développement{" "}
-          <strong>Fullstack</strong> est un vrai atout pour mettre les modèles
-          en production.
+          télétravail.
         </p>
       </article>
       <div className="flex flex-row flex-wrap lg:flex-col items-center justify-center gap-4 w-full lg:w-1/6">
