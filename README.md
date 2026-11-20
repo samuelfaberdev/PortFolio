@@ -10,23 +10,24 @@ Portfolio de **Samuel Faber**, Concepteur Développeur d'Applications Web et IA,
 - **À propos** : parcours, avec des onglets Hard Skills, Soft Skills, Formations et Expériences
 - **Mes projets** : grille de cartes avec visuel, description, technologies, lien de démo et lien vers le code
 - **Contact** : disponibilité, zone géographique, liens GitHub / LinkedIn et formulaire de contact
+- **Mentions légales et confidentialité** (`/mentions-legales`) : éditeur, hébergeur, données du formulaire, traceurs, refus des statistiques
 - Un easter egg se cache aussi quelque part… 🥚
 
 Le site est responsive (mobile, tablette, ordinateur). Un bouton dans l'en-tête permet de choisir le thème : automatique (selon le système), clair ou sombre. Le choix est mémorisé dans le navigateur ([`app/utils/theme.ts`](app/utils/theme.ts)).
 
 ## Stack technique
 
-| Domaine               | Outils                                                                               |
-| --------------------- | ------------------------------------------------------------------------------------ |
-| Framework             | [Next.js 14](https://nextjs.org/) (App Router, Server Actions), React 18, TypeScript |
-| Style                 | Tailwind CSS, `tailwindcss-animated`                                                 |
-| Formulaire de contact | [Resend](https://resend.com/) pour l'envoi d'e-mails, Google reCAPTCHA v3            |
-| Notifications         | `react-toastify`                                                                     |
-| Déploiement           | Docker (build Next.js `standalone`), Docker Compose                                  |
+| Domaine               | Outils                                                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Framework             | [Next.js 14](https://nextjs.org/) (App Router, Server Actions), React 18, TypeScript                                      |
+| Style                 | Tailwind CSS, `tailwindcss-animated`                                                                                      |
+| Formulaire de contact | [Resend](https://resend.com/) pour l'envoi d'e-mails, [ALTCHA](https://altcha.org/) contre le spam (sans cookie ni tiers) |
+| Notifications         | `react-toastify`                                                                                                          |
+| Déploiement           | Docker (build Next.js `standalone`), Docker Compose                                                                       |
 
 ## Démarrage en local
 
-**Prérequis** : Node.js 18.17 ou plus récent, et npm.
+**Prérequis** : Node.js 20 ou plus récent (requis par `altcha-lib`), et npm.
 
 ```bash
 git clone https://github.com/samuelfaberdev/PortFolio.git
@@ -53,25 +54,26 @@ Le site est disponible sur [http://localhost:3000](http://localhost:3000).
 
 Elles sont listées dans [`.env.sample`](.env.sample).
 
-| Variable                       | Rôle                                                                                           |
-| ------------------------------ | ---------------------------------------------------------------------------------------------- |
-| `RESEND_EMAIL`                 | Adresse qui **reçoit** les messages du formulaire de contact                                   |
-| `RESEND_API_KEY`               | Clé API [Resend](https://resend.com/api-keys)                                                  |
-| `NEXT_PUBLIC_CAPTCHA_SITE_KEY` | Clé de site reCAPTCHA v3 (publique, utilisée côté navigateur)                                  |
-| `CAPTCHA_SECRET_KEY`           | Clé secrète reCAPTCHA v3 (utilisée côté serveur)                                               |
-| `DATA_DIR`                     | Facultatif. Dossier du compteur de l'easter egg (par défaut `./data`, `/app/data` dans Docker) |
-| `NEXT_PUBLIC_UMAMI_URL`        | Facultatif. Adresse de l'instance Umami, ex. `https://stats.samuelfaber.dev`                   |
-| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | Facultatif. Identifiant du site dans Umami. Sans ces deux variables, aucun suivi               |
+| Variable                       | Rôle                                                                                                                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RESEND_EMAIL`                 | Adresse qui **reçoit** les messages du formulaire de contact                                                                                          |
+| `RESEND_API_KEY`               | Clé API [Resend](https://resend.com/api-keys)                                                                                                         |
+| `ALTCHA_SECRET`                | Secret de la protection anti-spam ALTCHA, à générer avec `openssl rand -hex 32`. Fourni au démarrage du conteneur seulement, jamais intégré à l'image |
+| `DATA_DIR`                     | Facultatif. Dossier du compteur de l'easter egg (par défaut `./data`, `/app/data` dans Docker)                                                        |
+| `NEXT_PUBLIC_UMAMI_URL`        | Facultatif. Adresse de l'instance Umami, ex. `https://stats.samuelfaber.dev`                                                                          |
+| `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | Facultatif. Identifiant du site dans Umami. Sans ces deux variables, aucun suivi                                                                      |
 
-Sans ces variables, le site s'affiche normalement, mais l'envoi du formulaire échoue. Pour tester le captcha en local, ajoute `localhost` aux domaines autorisés dans la [console reCAPTCHA](https://www.google.com/recaptcha/admin).
+Sans ces variables, le site s'affiche normalement, mais l'envoi du formulaire échoue. En local, n'importe quelle valeur suffit pour `ALTCHA_SECRET`.
 
 ## Formulaire de contact
 
 Le formulaire appelle la Server Action `contactMeAction` ([`app/actions.ts`](app/actions.ts)), qui :
 
 1. valide les champs côté serveur : format de l'e-mail, longueurs maximales, objet sur une seule ligne ;
-2. vérifie le jeton reCAPTCHA (score ≥ 0,5 et action `contact`) ;
+2. vérifie la preuve de travail **ALTCHA** ([`app/utils/altcha.ts`](app/utils/altcha.ts)) : défi signé, valable 10 minutes et utilisable une seule fois ;
 3. envoie le message **uniquement** à `RESEND_EMAIL`, avec un `replyTo` vers le visiteur, et un contenu HTML échappé.
+
+Le widget `<altcha-widget>` récupère un défi sur `GET /api/altcha/challenge`, puis le navigateur effectue un petit calcul (PBKDF2) au premier clic dans le formulaire. Aucun cookie, aucun service tiers : la protection est conforme au RGPD sans bandeau de consentement.
 
 Le site n'envoie donc jamais d'e-mail vers une adresse saisie dans le formulaire. L'expéditeur `contact@samuelfaber.dev` doit appartenir à un domaine vérifié dans Resend.
 
@@ -113,6 +115,9 @@ La configuration se trouve dans [`analytics/`](analytics/) :
 3. Ajouter le bloc de [`analytics/Caddyfile.example`](analytics/Caddyfile.example) au Caddyfile, puis recharger Caddy. Le sous-domaine `stats.samuelfaber.dev` doit pointer vers le serveur (enregistrement DNS A ou AAAA).
 4. Se connecter sur `https://stats.samuelfaber.dev` (identifiants par défaut `admin` / `umami`, à changer à la première connexion), puis ajouter le site `samuelfaber.dev` et copier son identifiant.
 5. Ajouter `NEXT_PUBLIC_UMAMI_URL` et `NEXT_PUBLIC_UMAMI_WEBSITE_ID` au `.env` du portfolio, puis reconstruire : `docker compose -f compose.prod.yml up -d --build`.
+6. Programmer la purge des statistiques de plus de **25 mois** (durée maximale recommandée par la CNIL, annoncée dans les mentions légales) avec [`analytics/purge-old-data.sh`](analytics/purge-old-data.sh). Par exemple, avec `crontab -e` : `0 4 1 * * /root/apps/portfolio/analytics/purge-old-data.sh >> /var/log/umami-purge.log 2>&1`.
+
+Les visiteurs peuvent refuser les statistiques depuis la page `/mentions-legales` : le bouton enregistre `umami.disabled` dans leur navigateur, et le script Umami n'envoie alors plus rien.
 
 ## Ajouter ou modifier un projet
 
@@ -141,18 +146,24 @@ Les onglets de la section « À propos » se modifient dans [`app/utils/data.tsx
 ```text
 app/
 ├── actions.ts            # Server Action du formulaire de contact
-├── layout.tsx            # Layout global (en-tête, pied de page, script reCAPTCHA)
+├── layout.tsx            # Layout global (en-tête, pied de page, thème, Umami)
 ├── page.tsx              # Page d'accueil (assemble les sections)
 ├── game/page.tsx         # Page cachée (easter egg)
+├── mentions-legales/     # Mentions légales et politique de confidentialité
+├── api/                  # Routes : défi ALTCHA, compteur de l'easter egg
 ├── components/           # Header, Navbar, sections Hero / About / Projects / Contact…
 └── utils/
     ├── data.tsx          # Contenu des onglets « À propos »
     ├── projects.ts       # Liste des projets
-    └── captcha.ts        # Génération du jeton reCAPTCHA côté client
+    ├── altcha.ts         # Création et vérification des défis anti-spam
+    ├── analytics.ts      # Envoi d'événements à Umami
+    ├── theme.ts          # Thème clair / sombre
+    └── visitCounter.ts   # Compteur de l'easter egg
 public/
 ├── cv/                   # CV téléchargeable
 └── images/               # Photo, icônes, visuels des projets
-@types/konami/            # Typage de la librairie konami
+@types/                  # Typages (konami, altcha, umami)
+analytics/                # Umami : compose, exemple Caddy, script de purge
 prod.Dockerfile           # Image de production (Next.js standalone)
 compose.prod.yml          # Déploiement Docker Compose
 ```

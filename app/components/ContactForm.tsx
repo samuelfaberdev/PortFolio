@@ -1,31 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { trackEvent } from "../utils/analytics";
 import { contactMeAction } from "../actions";
-import { generateToken } from "../utils/captcha";
 
 export default function ContactForm() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  // Le widget ALTCHA est un Web Component : on le charge côté navigateur uniquement
+  useEffect(() => {
+    import("altcha");
+    import("altcha/i18n/fr-fr");
+  }, []);
 
   async function submitContactForm(e: FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    const token = await generateToken();
-
-    const res = await contactMeAction(token, formData);
+    setSending(true);
+    const res = await contactMeAction(formData);
+    setSending(false);
 
     if (res.success) {
       toast.success(res.message);
       setEmailSubmitted(true);
       trackEvent("formulaire-contact-envoye");
-    }
-    if (!res.success) {
+    } else {
       toast.error(res.message);
+      // Une preuve ne sert qu'une fois : on en demande une nouvelle
+      form
+        .querySelector<HTMLElement & { reset?: () => void }>("altcha-widget")
+        ?.reset?.();
     }
   }
 
@@ -80,25 +89,33 @@ export default function ContactForm() {
               placeholder="Salut Samuel, parlons un peu de ton projet..."
             ></textarea>
           </div>
-          <p className=" text-xs">
-            Ce site est protégé par reCAPTCHA, les{" "}
-            <Link
-              className="gradient-text"
-              href="https://policies.google.com/privacy"
-            >
-              Règles de Confidentialité
-            </Link>{" "}
-            et les{" "}
-            <Link
-              className="gradient-text"
-              href="https://policies.google.com/terms"
-            >
-              Conditions d&apos;Utilisation
-            </Link>{" "}
-            de Google s&apos;appliquent.
+          <altcha-widget
+            challenge="/api/altcha/challenge"
+            language="fr-fr"
+            auto="onfocus"
+            configuration={JSON.stringify({ hideLogo: true })}
+            style={{
+              "--altcha-max-width": "100%",
+              "--altcha-border-radius": "0.375rem",
+              "--altcha-color-base": "var(--background)",
+              "--altcha-color-base-content": "var(--foreground)",
+              "--altcha-border-color": "rgb(115 115 115)",
+            }}
+          ></altcha-widget>
+          <p className="text-xs text-center">
+            Protection anti-spam sans cookie ni pistage (ALTCHA). Vos données
+            servent uniquement à vous répondre :{" "}
+            <Link className="gradient-text" href="/mentions-legales#formulaire">
+              en savoir plus
+            </Link>
+            .
           </p>
-          <button type="submit" className="gradient-button">
-            Envoyer votre message
+          <button
+            type="submit"
+            className="gradient-button disabled:opacity-60"
+            disabled={sending}
+          >
+            {sending ? "Envoi en cours…" : "Envoyer votre message"}
           </button>
         </form>
       )}

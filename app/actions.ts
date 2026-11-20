@@ -1,6 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
+import { verifyAltchaPayload } from "./utils/altcha";
 
 const LIMITS = { email: 254, subject: 150, message: 5000 };
 const EMAIL_REGEX = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]{2,}$/;
@@ -23,13 +24,8 @@ function readField(formData: FormData, name: string) {
 }
 
 export async function contactMeAction(
-  token: string | null,
-  formData: FormData
+  formData: FormData,
 ): Promise<ActionResult> {
-  if (!token) {
-    return { success: false, message: "Token non trouvé." };
-  }
-
   // 1. Validation des champs, côté serveur (le client n'est pas fiable)
   const email = readField(formData, "email");
   // Pas de retour à la ligne dans un objet d'e-mail
@@ -52,16 +48,19 @@ export async function contactMeAction(
     };
   }
 
-  // 2. Vérification du captcha
-  const captchaData = await verifyCaptchaToken(token);
-
-  if (
-    !captchaData ||
-    !captchaData.success ||
-    captchaData.score < 0.5 ||
-    captchaData.action !== "contact"
-  ) {
-    return { success: false, message: "Le Captcha a échoué." };
+  // 2. Vérification anti-spam ALTCHA (preuve de travail, sans cookie ni tiers)
+  let isHuman = false;
+  try {
+    isHuman = await verifyAltchaPayload(formData.get("altcha"));
+  } catch (error) {
+    console.error("ALTCHA :", error);
+    return { success: false, message: "Une erreur est survenue." };
+  }
+  if (!isHuman) {
+    return {
+      success: false,
+      message: "La vérification anti-spam a échoué, réessayez.",
+    };
   }
 
   // 3. Envoi : le message part uniquement vers ma boîte, jamais vers une
@@ -98,34 +97,3 @@ export async function contactMeAction(
 
   return { success: true, message: "Message envoyé avec succès." };
 }
-
-async function verifyCaptchaToken(token: string) {
-  const secretKey = process.env.CAPTCHA_SECRET_KEY;
-  if (!secretKey) {
-    throw new Error("No secret key found.");
-  }
-
-  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ secret: secretKey, response: token }),
-  });
-
-  if (!res.ok) return null;
-
-  const captchaData: CaptchaData = await res.json();
-  return captchaData;
-}
-
-type CaptchaData =
-  | {
-      success: true;
-      challenge_ts: string;
-      hostname: string;
-      score: number;
-      action: string;
-    }
-  | {
-      success: false;
-      "error-codes": string[];
-    };

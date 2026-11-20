@@ -7,10 +7,11 @@ services:
       args:
         RESEND_EMAIL: ${RESEND_EMAIL}
         RESEND_API_KEY: ${RESEND_API_KEY}
-        NEXT_PUBLIC_CAPTCHA_SITE_KEY: ${NEXT_PUBLIC_CAPTCHA_SITE_KEY}
-        CAPTCHA_SECRET_KEY: ${CAPTCHA_SECRET_KEY}
         NEXT_PUBLIC_UMAMI_URL: ${NEXT_PUBLIC_UMAMI_URL:-}
         NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${NEXT_PUBLIC_UMAMI_WEBSITE_ID:-}
+    environment:
+      # Secret ALTCHA : fourni au démarrage uniquement, jamais intégré à l'image
+      ALTCHA_SECRET: ${ALTCHA_SECRET:-}
     restart: always
     ports:
       - 8000:3000
