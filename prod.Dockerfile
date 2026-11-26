@@ -70,6 +70,12 @@ ENV RESEND_API_KEY=${RESEND_API_KEY}
 # Uncomment the following line to disable telemetry at run time
 # ENV NEXT_TELEMETRY_DISABLED 1
 
+# Écoute sur toutes les interfaces du conteneur. Indispensable avec le
+# middleware de langue : sinon Docker impose le nom du conteneur et les
+# réécritures internes (/ → /fr) échouent.
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
+
 # Note: Don't expose ports here, Compose will handle that for us
 
 CMD ["node", "server.js"]
