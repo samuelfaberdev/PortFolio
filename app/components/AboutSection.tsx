@@ -27,10 +27,11 @@ export default function AboutSection() {
       <div className="w-full max-w-sm mx-auto lg:mx-0 lg:max-w-none lg:w-2/6 rounded-lg">
         <Image
           className="rounded-3xl"
-          src={"/images/bureau.jpg"}
+          src="/images/bureau.webp"
           alt={t("imageAlt")}
           width={400}
           height={400}
+          sizes="(min-width: 1024px) 400px, 384px"
         />
       </div>
       <article className="flex flex-col gap-4 w-full lg:w-4/6">

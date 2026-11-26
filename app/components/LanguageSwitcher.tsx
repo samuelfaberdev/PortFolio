@@ -46,7 +46,7 @@ export default function LanguageSwitcher() {
                 hrefLang={target}
                 lang={target}
                 title={t("switchTo")}
-                aria-label={t("switchTo")}
+                aria-label={`${target.toUpperCase()}, ${t("switchTo")}`}
                 className="block rounded-full px-1.5 sm:px-2 py-1 transition hover:opacity-70"
               >
                 {target.toUpperCase()}

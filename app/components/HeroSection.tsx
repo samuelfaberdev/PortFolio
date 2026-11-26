@@ -37,10 +37,13 @@ export default function HeroSection() {
       <div className="order-first lg:order-none flex items-center justify-center w-auto">
         <Image
           className="rounded-full h-48 w-48 sm:h-64 sm:w-64 lg:h-80 lg:w-80"
-          src="/images/profil.jpg"
+          src="/images/profil.webp"
           alt={t("photoAlt")}
           width={320}
           height={320}
+          // Image principale du haut de page : chargée en priorité
+          priority
+          sizes="(min-width: 1024px) 320px, (min-width: 640px) 256px, 192px"
         />
       </div>
     </section>

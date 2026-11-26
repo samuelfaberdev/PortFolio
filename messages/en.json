@@ -94,7 +94,7 @@
     "subjectPlaceholder": "Hi Samuel!",
     "message": "Your message:",
     "messagePlaceholder": "Hi Samuel, let's talk about your project...",
-    "notice": "Cookie-free, tracking-free spam protection (ALTCHA). Your data is only used to reply to you: <link>learn more</link>.",
+    "notice": "Cookie-free, tracking-free spam protection (ALTCHA). Your data is only used to reply to you: <link>learn more about your data</link>.",
     "sending": "Sending…",
     "send": "Send your message",
     "sent": "Message sent successfully!"
