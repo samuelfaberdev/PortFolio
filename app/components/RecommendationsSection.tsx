@@ -12,8 +12,9 @@ export default function RecommendationsSection() {
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl lg:text-4xl">Ils me recommandent</h2>
         <p>
-          Quelques mots de mes responsables et de mes camarades, extraits de
-          leurs recommandations publiées sur LinkedIn.
+          Quelques mots de mon professeur au Wagon et de mes responsables à la
+          Wild Code School, extraits de leurs recommandations publiées sur
+          LinkedIn.
         </p>
       </div>
 
@@ -29,9 +30,25 @@ export default function RecommendationsSection() {
             >
               “
             </span>
-            <blockquote className="flex-1 italic text-neutral-700 dark:text-neutral-300">
-              {rec.quote}
-            </blockquote>
+            <div className="flex-1 flex flex-col gap-3">
+              <blockquote
+                lang={rec.lang}
+                className="italic text-neutral-700 dark:text-neutral-300"
+              >
+                {rec.quote}
+              </blockquote>
+              {rec.translation && (
+                <details className="text-sm text-neutral-600 dark:text-neutral-400">
+                  <summary className="cursor-pointer w-fit underline underline-offset-4 hover:opacity-70">
+                    Voir la traduction française
+                  </summary>
+                  <p className="mt-2 italic">
+                    <span className="not-italic font-bold">Traduction : </span>
+                    {rec.translation}
+                  </p>
+                </details>
+              )}
+            </div>
             <figcaption className="flex flex-col border-t border-neutral-200 pt-4 dark:border-neutral-800">
               <span className="font-bold">{rec.author}</span>
               <span className="text-sm text-neutral-600 dark:text-neutral-400">
