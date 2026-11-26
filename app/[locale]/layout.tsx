@@ -4,7 +4,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { alternatesFor } from "@/i18n/metadata";
+import { routing, type Locale } from "@/i18n/routing";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ToastProvider from "../components/ToastContainer";
@@ -40,23 +41,27 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" });
   const title = t("title");
   const description = t("description");
-  const url = locale === routing.defaultLocale ? "/" : `/${locale}`;
+  const alternates = alternatesFor("/", locale as Locale);
+  // Image d'aperçu dans la langue de la page
+  const image = locale === "en" ? "/og-image-en.jpg" : "/og-image.jpg";
 
   return {
     metadataBase: new URL(SITE_URL),
     title,
     description,
+    alternates,
     // Aperçu des liens partagés (Facebook, LinkedIn, Messenger, WhatsApp…)
     openGraph: {
       type: "website",
       locale: locale === "fr" ? "fr_FR" : "en_US",
-      url,
+      alternateLocale: locale === "fr" ? "en_US" : "fr_FR",
+      url: alternates.canonical,
       siteName: "samuelfaber.dev",
       title,
       description,
       images: [
         {
-          url: "/og-image.jpg",
+          url: image,
           width: 1200,
           height: 630,
           alt: t("ogImageAlt"),
@@ -67,7 +72,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.jpg"],
+      images: [image],
     },
   };
 }
