@@ -1,9 +1,11 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import type { Locale } from "@/i18n/routing";
 import Image from "next/image";
 import { PROJECTS, type Project } from "../utils/projects";
 
 function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations("Projects");
+  const locale = useLocale() as Locale;
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl border-2 border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/40 transition duration-300 hover:-translate-y-1 hover:border-pink-500/60">
       <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-pink-500/20 to-orange-400/20">
@@ -27,11 +29,11 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex flex-1 flex-col gap-3 p-5">
         <p className="text-sm uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
-          {project.context}
+          {project.context[locale]}
         </p>
         <h3 className="text-2xl font-bold">{project.title}</h3>
         <p className="flex-1 text-neutral-700 dark:text-neutral-300">
-          {project.description}
+          {project.description[locale]}
         </p>
 
         <div className="flex flex-col gap-1 text-sm text-neutral-600 dark:text-neutral-400">
@@ -47,7 +49,7 @@ function ProjectCard({ project }: { project: Project }) {
               <strong className="text-neutral-800 dark:text-neutral-200">
                 {t("role")}
               </strong>{" "}
-              {project.team.role}
+              {project.team.role[locale]}
             </p>
           )}
         </div>
@@ -73,14 +75,14 @@ function ProjectCard({ project }: { project: Project }) {
               data-umami-event="projet-demo"
               data-umami-event-projet={project.title}
             >
-              {project.demo.label ?? t("demo")}
+              {project.demo.label?.[locale] ?? t("demo")}
             </a>
           ) : (
             <span
-              title={project.unavailable?.hint}
+              title={project.unavailable?.hint?.[locale]}
               className="cursor-default rounded-full border border-dashed border-neutral-300 dark:border-neutral-700 px-5 py-2.5 text-sm text-neutral-500 dark:text-neutral-400 me-2 mb-2"
             >
-              {project.unavailable?.label ?? t("notOnline")}
+              {project.unavailable?.label[locale] ?? t("notOnline")}
             </span>
           )}
           {project.repo && (

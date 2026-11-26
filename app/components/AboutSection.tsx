@@ -1,19 +1,19 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import type { Locale } from "@/i18n/routing";
 import Image from "next/image";
 import { useState, useTransition } from "react";
-import { DATA } from "../utils/data";
-
-const TABS = ["hardskills", "softskills", "education", "experiences"] as const;
+import { TAB_IDS, tabContent, type TabId } from "../utils/data";
 
 export default function AboutSection() {
   const t = useTranslations("About");
-  const [tab, setTab] = useState("hardskills");
+  const locale = useLocale() as Locale;
+  const [tab, setTab] = useState<TabId>("hardskills");
 
   const [, startTransition] = useTransition();
 
-  const handleTabChange = (id: string) => {
+  const handleTabChange = (id: TabId) => {
     startTransition(() => {
       setTab(id);
     });
@@ -38,7 +38,7 @@ export default function AboutSection() {
         <p>{t("intro1")}</p>
         <p>{t("intro2")}</p>
         <div role="tablist" className="flex flex-wrap gap-x-4 gap-y-2">
-          {TABS.map((id) => (
+          {TAB_IDS.map((id) => (
             <button
               key={id}
               type="button"
@@ -52,7 +52,7 @@ export default function AboutSection() {
             </button>
           ))}
         </div>
-        <div>{DATA.find((t) => t.id === tab)?.content}</div>
+        <div role="tabpanel">{tabContent(tab, locale)}</div>
       </article>
     </section>
   );
