@@ -1,0 +1,125 @@
+{
+  "Metadata": {
+    "title": "Samuel Faber · Développeur IA, Data Engineering & MLOps",
+    "description": "Portfolio de Samuel Faber, concepteur développeur d'applications web et IA : projets, parcours et contact. En recherche d'une alternance ou d'un CDI en Data Engineering ou MLOps, région nantaise.",
+    "ogImageAlt": "Samuel Faber, concepteur développeur d'applications web et IA, en recherche d'alternance ou de CDI en Data Engineering ou MLOps"
+  },
+  "Header": {
+    "logoAlt": "Logo",
+    "home": "Accueil"
+  },
+  "Nav": {
+    "about": "A propos",
+    "projects": "Mes projets",
+    "recommendations": "Recommandations",
+    "contact": "Contact",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "Language": {
+    "label": "Langue",
+    "switchTo": "Read this site in English",
+    "fr": "Français",
+    "en": "English"
+  },
+  "Theme": {
+    "system": "automatique (selon le système)",
+    "light": "clair",
+    "dark": "sombre",
+    "ariaLabel": "Thème {current}. Passer au thème {next}",
+    "title": "Thème : {current}"
+  },
+  "Footer": {
+    "copyright": "© {year} - Développé avec 💖 par Samuel Faber",
+    "analytics": "Statistiques de visite anonymes, sans cookie, hébergées sur mon serveur (Umami).",
+    "legal": "Mentions légales et confidentialité"
+  },
+  "Hero": {
+    "title": "Hello, world ! Moi c'est <strong>Samuel</strong> !",
+    "welcome": "Bienvenue sur mon <strong>Portfolio</strong>.",
+    "intro": "<strong>Concepteur Développeur d'Applications Web et IA</strong>, je me suis reconverti dans le <strong>développement web</strong> avant de poursuivre avec le Bootcamp <strong>Data Science & AI</strong> du Wagon.",
+    "search": "Je recherche avant tout une <strong>alternance (niveau 7)</strong> ou un <strong>CDI</strong> en <strong>Data Science</strong>, plus spécifiquement en <strong>Data Engineering</strong> ou en <strong>MLOps</strong>, sur la région nazairienne et nantaise, sur site, en hybride ou en télétravail.",
+    "contact": "Me contacter",
+    "cv": "Télécharger mon CV",
+    "cvTitle": "CV en français (PDF)",
+    "photoAlt": "Ma photo de profil"
+  },
+  "About": {
+    "title": "A propos de moi",
+    "intro1": "De formation initiale dans la maintenance industrielle puis biomédicale, et après avoir exercé de nombreux autres métiers, j'ai choisi de me reconvertir dans le développement web, avant de poursuivre vers la Data Science et l'intelligence artificielle.",
+    "intro2": "Dans cette section vous découvrirez mes diverses compétences acquises au fil de ma reconversion et de mon parcours professionnel, ainsi que mes différentes expériences dans le développement et la data.",
+    "imageAlt": "Un bureau d'ordinateur",
+    "tabs": {
+      "hardskills": "Hard Skills",
+      "softskills": "Soft Skills",
+      "education": "Formations",
+      "experiences": "Experiences"
+    }
+  },
+  "Projects": {
+    "title": "Mes projets",
+    "intro": "Projets de formation, hackathons, projets perso et quelques jeux, réalisés seul ou en équipe : voici une sélection de ce que j'ai construit, du front au back en passant par la data.",
+    "preview": "Aperçu du projet {title}",
+    "teamOf": "👥 Projet en équipe de {size}",
+    "team": "👥 Projet en équipe",
+    "solo": "👤 Projet réalisé seul",
+    "role": "Mon rôle :",
+    "technologies": "Technologies",
+    "demo": "Voir le site",
+    "notOnline": "Pas encore en ligne",
+    "code": "Code",
+    "allOnGithub": "Voir tous mes projets sur GitHub →"
+  },
+  "Recommendations": {
+    "title": "Ils me recommandent",
+    "intro": "Quelques mots de mon professeur au Wagon et de mes responsables à la Wild Code School, extraits de leurs recommandations publiées sur LinkedIn.",
+    "showTranslation": "Voir la traduction française",
+    "translation": "Traduction : ",
+    "allOnLinkedin": "Voir toutes mes recommandations sur LinkedIn →"
+  },
+  "Contact": {
+    "title": "Contactez-moi",
+    "intro1": "Je suis actuellement à la recherche de nouvelles opportunités !",
+    "intro2": "N'hésitez pas à me contacter dès à présent via LinkedIn, GitHub ou par mail.",
+    "available": "💼 <strong>Disponible</strong> pour une alternance (niveau 7) ou un CDI en Data Science, plus spécifiquement en Data Engineering ou en MLOps",
+    "location": "📍 Région nazairienne et nantaise",
+    "remote": "🏠 Sur site, hybride ou en télétravail",
+    "github": "Profil GitHub",
+    "linkedin": "Profil LinkedIn"
+  },
+  "ContactForm": {
+    "email": "Email :",
+    "emailPlaceholder": "nom@provider.fr",
+    "subject": "Objet :",
+    "subjectPlaceholder": "Salut Samuel !",
+    "message": "Votre message :",
+    "messagePlaceholder": "Salut Samuel, parlons un peu de ton projet...",
+    "notice": "Protection anti-spam sans cookie ni pistage (ALTCHA). Vos données servent uniquement à vous répondre : <link>en savoir plus</link>.",
+    "sending": "Envoi en cours…",
+    "send": "Envoyer votre message",
+    "sent": "Message envoyé avec succès !"
+  },
+  "Actions": {
+    "invalidEmail": "Adresse e-mail invalide.",
+    "subjectRequired": "L'objet est requis ({max} caractères maximum).",
+    "messageRequired": "Le message est requis ({max} caractères maximum).",
+    "spamCheckFailed": "La vérification anti-spam a échoué, réessayez.",
+    "error": "Une erreur est survenue.",
+    "sendFailed": "L'envoi a échoué, réessayez plus tard.",
+    "success": "Message envoyé avec succès."
+  },
+  "EasterEgg": {
+    "found": "Bravo, tu es la <b>{rank, selectordinal, one {#ʳᵉ} other {#ᵉ}}</b> personne à trouver cet easter egg !",
+    "alreadyFound": "<b>{count, number}</b> {count, plural, one {personne a trouvé} other {personnes ont trouvé}} cet easter egg (et tu en fais partie !)"
+  },
+  "StatsOptOut": {
+    "optedOut": "🚫 Vos visites ne sont pas comptées dans les statistiques sur ce navigateur.",
+    "optedIn": "📊 Vos visites sont comptées de façon anonyme dans les statistiques.",
+    "enable": "Réactiver les statistiques",
+    "disable": "Refuser les statistiques"
+  },
+  "NotFound": {
+    "message": "Cette page n'existe pas (ou plus).",
+    "back": "Retour à l'accueil"
+  }
+}

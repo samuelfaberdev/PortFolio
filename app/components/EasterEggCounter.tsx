@@ -1,14 +1,17 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "../utils/analytics";
 
 type CounterData = { count: number; alreadyCounted: boolean };
 
-const formatNumber = (n: number) => n.toLocaleString("fr-FR");
-const ordinal = (n: number) => (n === 1 ? "1ʳᵉ" : `${formatNumber(n)}ᵉ`);
+const b = (chunks: React.ReactNode) => (
+  <span className="gradient-text font-bold">{chunks}</span>
+);
 
 export default function EasterEggCounter() {
+  const t = useTranslations("EasterEgg");
   const [data, setData] = useState<CounterData | null>(null);
   const requested = useRef(false);
 
@@ -38,23 +41,9 @@ export default function EasterEggCounter() {
       className="animate-fade self-center mx-4 mt-6 rounded-full border-2 border-neutral-300 dark:border-neutral-700 px-5 py-2 text-center"
     >
       🥚{" "}
-      {data.alreadyCounted ? (
-        <>
-          <span className="gradient-text font-bold">
-            {formatNumber(data.count)}
-          </span>{" "}
-          {data.count > 1
-            ? "personnes ont trouvé cet easter egg"
-            : "personne a trouvé cet easter egg"}{" "}
-          (et tu en fais partie !)
-        </>
-      ) : (
-        <>
-          Bravo, tu es la{" "}
-          <span className="gradient-text font-bold">{ordinal(data.count)}</span>{" "}
-          personne à trouver cet easter egg !
-        </>
-      )}
+      {data.alreadyCounted
+        ? t.rich("alreadyFound", { count: data.count, b })
+        : t.rich("found", { rank: data.count, b })}
     </p>
   );
 }

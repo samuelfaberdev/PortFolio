@@ -1,6 +1,8 @@
 "use server";
 
+import { getTranslations } from "next-intl/server";
 import { Resend } from "resend";
+import { routing } from "@/i18n/routing";
 import { verifyAltchaPayload } from "./utils/altcha";
 
 const LIMITS = { email: 254, subject: 150, message: 5000 };
@@ -26,6 +28,13 @@ function readField(formData: FormData, name: string) {
 export async function contactMeAction(
   formData: FormData,
 ): Promise<ActionResult> {
+  // Langue des messages renvoyés au visiteur (français par défaut)
+  const requested = readField(formData, "locale");
+  const locale = (routing.locales as readonly string[]).includes(requested)
+    ? requested
+    : routing.defaultLocale;
+  const t = await getTranslations({ locale, namespace: "Actions" });
+
   // 1. Validation des champs, côté serveur (le client n'est pas fiable)
   const email = readField(formData, "email");
   // Pas de retour à la ligne dans un objet d'e-mail
@@ -33,18 +42,18 @@ export async function contactMeAction(
   const message = readField(formData, "message");
 
   if (!email || email.length > LIMITS.email || !EMAIL_REGEX.test(email)) {
-    return { success: false, message: "Adresse e-mail invalide." };
+    return { success: false, message: t("invalidEmail") };
   }
   if (!subject || subject.length > LIMITS.subject) {
     return {
       success: false,
-      message: `L'objet est requis (${LIMITS.subject} caractères maximum).`,
+      message: t("subjectRequired", { max: LIMITS.subject }),
     };
   }
   if (!message || message.length > LIMITS.message) {
     return {
       success: false,
-      message: `Le message est requis (${LIMITS.message} caractères maximum).`,
+      message: t("messageRequired", { max: LIMITS.message }),
     };
   }
 
@@ -54,12 +63,12 @@ export async function contactMeAction(
     isHuman = await verifyAltchaPayload(formData.get("altcha"));
   } catch (error) {
     console.error("ALTCHA :", error);
-    return { success: false, message: "Une erreur est survenue." };
+    return { success: false, message: t("error") };
   }
   if (!isHuman) {
     return {
       success: false,
-      message: "La vérification anti-spam a échoué, réessayez.",
+      message: t("spamCheckFailed"),
     };
   }
 
@@ -68,7 +77,7 @@ export async function contactMeAction(
   const resendEmail = process.env.RESEND_EMAIL;
   if (!resendEmail) {
     console.error("RESEND_EMAIL n'est pas défini.");
-    return { success: false, message: "Une erreur est survenue." };
+    return { success: false, message: t("error") };
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -91,9 +100,9 @@ export async function contactMeAction(
     console.error("Erreur Resend :", error);
     return {
       success: false,
-      message: "L'envoi a échoué, réessayez plus tard.",
+      message: t("sendFailed"),
     };
   }
 
-  return { success: true, message: "Message envoyé avec succès." };
+  return { success: true, message: t("success") };
 }

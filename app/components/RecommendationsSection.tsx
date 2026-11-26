@@ -1,21 +1,19 @@
+import { useTranslations } from "next-intl";
 import {
   LINKEDIN_RECOMMENDATIONS_URL,
   RECOMMENDATIONS,
 } from "../utils/recommendations";
 
 export default function RecommendationsSection() {
+  const t = useTranslations("Recommendations");
   return (
     <section
       id="recommandations"
       className="w-full scroll-mt-20 md:scroll-mt-28 p-4 flex flex-col gap-8"
     >
       <div className="flex flex-col gap-4">
-        <h2 className="text-3xl lg:text-4xl">Ils me recommandent</h2>
-        <p>
-          Quelques mots de mon professeur au Wagon et de mes responsables à la
-          Wild Code School, extraits de leurs recommandations publiées sur
-          LinkedIn.
-        </p>
+        <h2 className="text-3xl lg:text-4xl">{t("title")}</h2>
+        <p>{t("intro")}</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -40,10 +38,12 @@ export default function RecommendationsSection() {
               {rec.translation && (
                 <details className="text-sm text-neutral-600 dark:text-neutral-400">
                   <summary className="cursor-pointer w-fit underline underline-offset-4 hover:opacity-70">
-                    Voir la traduction française
+                    {t("showTranslation")}
                   </summary>
                   <p className="mt-2 italic">
-                    <span className="not-italic font-bold">Traduction : </span>
+                    <span className="not-italic font-bold">
+                      {t("translation")}
+                    </span>
                     {rec.translation}
                   </p>
                 </details>
@@ -69,7 +69,7 @@ export default function RecommendationsSection() {
         className="self-center gradient-text text-lg font-bold transition hover:opacity-80"
         data-umami-event="recommandations-linkedin"
       >
-        Voir toutes mes recommandations sur LinkedIn →
+        {t("allOnLinkedin")}
       </a>
     </section>
   );

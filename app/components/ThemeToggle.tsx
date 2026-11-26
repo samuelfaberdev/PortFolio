@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { THEME_STORAGE_KEY, type ThemePreference } from "../utils/theme";
 
@@ -10,12 +11,6 @@ declare global {
 }
 
 const ORDER: ThemePreference[] = ["system", "light", "dark"];
-
-const LABELS: Record<ThemePreference, string> = {
-  system: "automatique (selon le système)",
-  light: "clair",
-  dark: "sombre",
-};
 
 function Icon({ preference }: { preference: ThemePreference }) {
   const common = {
@@ -53,6 +48,7 @@ function Icon({ preference }: { preference: ThemePreference }) {
 }
 
 export default function ThemeToggle() {
+  const t = useTranslations("Theme");
   const [preference, setPreference] = useState<ThemePreference | null>(null);
 
   // Lecture du choix enregistré après le montage (évite un écart d'hydratation)
@@ -93,8 +89,8 @@ export default function ThemeToggle() {
       type="button"
       onClick={cycle}
       className="p-2 rounded-lg transition hover:opacity-70"
-      aria-label={`Thème ${LABELS[current]}. Passer au thème ${LABELS[next]}`}
-      title={`Thème : ${LABELS[current]}`}
+      aria-label={t("ariaLabel", { current: t(current), next: t(next) })}
+      title={t("title", { current: t(current) })}
       data-umami-event="changement-theme"
       data-umami-event-theme={next}
     >
