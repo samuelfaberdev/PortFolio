@@ -1,5 +1,7 @@
 # samuelfaber.dev
 
+[![CI](https://github.com/samuelfaberdev/PortFolio/actions/workflows/ci.yml/badge.svg)](https://github.com/samuelfaberdev/PortFolio/actions/workflows/ci.yml)
+
 Portfolio de **Samuel Faber**, Concepteur Développeur d'Applications Web et IA, en recherche d'une alternance (niveau 7) ou d'un CDI en Data Science.
 
 🌐 **Site en ligne : [samuelfaber.dev](https://samuelfaber.dev/)**
@@ -191,6 +193,15 @@ analytics/                # Umami : compose, exemple Caddy, script de purge
 prod.Dockerfile           # Image de production (Next.js standalone)
 compose.prod.yml          # Déploiement Docker Compose
 ```
+
+## Intégration continue (GitHub Actions)
+
+Chaque pull request et chaque mise à jour de `main` lance [`.github/workflows/ci.yml`](.github/workflows/ci.yml) :
+
+1. **Lint, typage et build** : `npm run lint`, `npm run typecheck`, `npm run build`.
+2. **Image Docker de production** : build de `prod.Dockerfile`, démarrage du conteneur, puis vérification des pages en français et en anglais, de la détection de langue, de la page 404, du défi ALTCHA, du plan du site, du CV et de l'optimisation des images.
+
+Les secrets utilisés sont factices : aucun e-mail n'est envoyé. Si une étape échoue, la PR est marquée en rouge, et les journaux du conteneur sont affichés à la fin du job.
 
 ## Déploiement (Docker)
 

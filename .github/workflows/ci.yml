@@ -1,0 +1,115 @@
+name: CI
+
+# Vérifie chaque pull request et chaque mise à jour de main :
+# qualité du code, build Next.js, puis build et démarrage de l'image Docker
+# de production.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Une nouvelle poussée sur la même branche annule la vérification en cours
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+
+jobs:
+  qualite:
+    name: Lint, typage et build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # même version que l'image Docker
+          cache: npm
+
+      - name: Installation des dépendances
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Typage (TypeScript)
+        run: npm run typecheck
+
+      - name: Build Next.js
+        run: npm run build
+
+  docker:
+    name: Image Docker de production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      # Construit l'image exactement comme sur le serveur (prod.Dockerfile).
+      # Les secrets sont factices : aucun e-mail n'est envoyé pendant les tests.
+      - name: Build de l'image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: prod.Dockerfile
+          load: true
+          tags: portfolio:ci
+          build-args: |
+            RESEND_EMAIL=ci@example.com
+            RESEND_API_KEY=re_ci_factice
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Démarrage du conteneur
+        run: |
+          docker run -d --name portfolio -p 3000:3000 \
+            -e ALTCHA_SECRET=secret-factice-ci portfolio:ci
+          # Attend que le serveur réponde (30 s maximum)
+          for _ in $(seq 1 30); do
+            curl -s -o /dev/null http://localhost:3000/en && exit 0
+            sleep 1
+          done
+          echo "Le serveur n'a pas démarré"; docker logs portfolio; exit 1
+
+      - name: Vérification des pages et de la langue
+        run: |
+          set -u
+          check() { # check <description> <code attendu> <url> [langue du navigateur]
+            code=$(curl -s -o /tmp/page -w '%{http_code}' \
+              -H "Accept-Language: ${4:-fr-FR}" "http://localhost:3000$3")
+            if [ "$code" = "$2" ]; then echo "✅ $1 ($code)";
+            else echo "❌ $1 : $code au lieu de $2"; FAILED=1; fi
+          }
+          FAILED=0
+          check "Accueil en français"            200 /
+          check "Accueil en anglais"             200 /en
+          check "Redirection d'un anglophone"    307 / en-US
+          check "Mentions légales"               200 /mentions-legales
+          check "Legal notice"                   200 /en/mentions-legales
+          check "Page cachée"                    200 /game
+          check "Page inexistante"               404 /page-inexistante
+          check "Défi anti-spam ALTCHA"          200 /api/altcha/challenge
+          check "Plan du site"                   200 /sitemap.xml
+          check "CV"                             200 /cv/CV_Samuel_Faber.pdf
+          # Les images doivent être optimisées par sharp (WebP, plus légères)
+          size=$(curl -s -o /dev/null -w '%{size_download}' -H 'Accept: image/webp' \
+            'http://localhost:3000/_next/image?url=%2Fimages%2Fbureau.webp&w=384&q=75')
+          if [ "$size" -gt 0 ] && [ "$size" -lt 60000 ]; then echo "✅ Images optimisées ($size octets)";
+          else echo "❌ Images non optimisées ($size octets)"; FAILED=1; fi
+          # Le contenu doit être dans la bonne langue
+          if curl -s http://localhost:3000/en | grep -q '<html lang="en"'; then echo "✅ Version anglaise";
+          else echo "❌ Version anglaise absente"; FAILED=1; fi
+          [ "$FAILED" = 0 ] || { docker logs portfolio; exit 1; }
+
+      - name: Journaux du conteneur
+        if: always()
+        run: docker logs portfolio 2>&1 | tail -50 || true
