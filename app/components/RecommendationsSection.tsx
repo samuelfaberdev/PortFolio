@@ -60,7 +60,7 @@ export default function RecommendationsSection() {
                 <span className="text-sm text-neutral-600 dark:text-neutral-400">
                   {rec.title[locale]}
                 </span>
-                <span className="text-sm text-neutral-500 dark:text-neutral-500">
+                <span className="text-sm text-neutral-600 dark:text-neutral-400">
                   {rec.relation[locale]} · {rec.date[locale]}
                 </span>
               </figcaption>

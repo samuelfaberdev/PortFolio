@@ -94,7 +94,7 @@
     "subjectPlaceholder": "Salut Samuel !",
     "message": "Votre message :",
     "messagePlaceholder": "Salut Samuel, parlons un peu de ton projet...",
-    "notice": "Protection anti-spam sans cookie ni pistage (ALTCHA). Vos données servent uniquement à vous répondre : <link>en savoir plus</link>.",
+    "notice": "Protection anti-spam sans cookie ni pistage (ALTCHA). Vos données servent uniquement à vous répondre : <link>en savoir plus sur vos données</link>.",
     "sending": "Envoi en cours…",
     "send": "Envoyer votre message",
     "sent": "Message envoyé avec succès !"
