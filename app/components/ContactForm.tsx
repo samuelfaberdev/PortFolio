@@ -1,25 +1,31 @@
 "use client";
 
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { Link } from "@/i18n/navigation";
 import { trackEvent } from "../utils/analytics";
 import { contactMeAction } from "../actions";
 
 export default function ContactForm() {
+  const t = useTranslations("ContactForm");
+  const locale = useLocale();
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
   // Le widget ALTCHA est un Web Component : on le charge côté navigateur uniquement
   useEffect(() => {
     import("altcha");
-    import("altcha/i18n/fr-fr");
-  }, []);
+    if (locale === "fr") import("altcha/i18n/fr-fr");
+    else import("altcha/i18n/en");
+  }, [locale]);
 
   async function submitContactForm(e: FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
+    // Langue des messages de retour du serveur
+    formData.set("locale", locale);
 
     setSending(true);
     const res = await contactMeAction(formData);
@@ -41,7 +47,7 @@ export default function ContactForm() {
   return (
     <div className="flex items-center justify-center w-full lg:w-1/2">
       {emailSubmitted ? (
-        <p className="text-green-500">Message envoyé avec succès !</p>
+        <p className="text-green-500">{t("sent")}</p>
       ) : (
         <form
           name="contactForm"
@@ -50,7 +56,7 @@ export default function ContactForm() {
         >
           <div className="flex flex-col gap-1 w-full">
             <label className="pl-1" htmlFor="email">
-              Email :
+              {t("email")}
             </label>
             <input
               className="p-2 border border-neutral-500 bg-neutral-700 rounded-md"
@@ -59,12 +65,12 @@ export default function ContactForm() {
               id="email"
               required
               maxLength={254}
-              placeholder="nom@provider.fr"
+              placeholder={t("emailPlaceholder")}
             />
           </div>
           <div className="flex flex-col gap-1 w-full">
             <label className="pl-1" htmlFor="subject">
-              Objet :
+              {t("subject")}
             </label>
             <input
               className="p-2 border border-neutral-500 bg-neutral-700 rounded-md"
@@ -73,12 +79,12 @@ export default function ContactForm() {
               id="subject"
               required
               maxLength={150}
-              placeholder="Salut Samuel !"
+              placeholder={t("subjectPlaceholder")}
             />
           </div>
           <div className="flex flex-col gap-1 w-full">
             <label className="pl-1" htmlFor="message">
-              Votre message :
+              {t("message")}
             </label>
             <textarea
               className="p-2 border border-neutral-500 bg-neutral-700 rounded-md"
@@ -86,12 +92,12 @@ export default function ContactForm() {
               id="message"
               required
               maxLength={5000}
-              placeholder="Salut Samuel, parlons un peu de ton projet..."
+              placeholder={t("messagePlaceholder")}
             ></textarea>
           </div>
           <altcha-widget
             challenge="/api/altcha/challenge"
-            language="fr-fr"
+            language={locale === "fr" ? "fr-fr" : "en"}
             auto="onfocus"
             configuration={JSON.stringify({ hideLogo: true })}
             style={{
@@ -103,19 +109,23 @@ export default function ContactForm() {
             }}
           ></altcha-widget>
           <p className="text-xs text-center">
-            Protection anti-spam sans cookie ni pistage (ALTCHA). Vos données
-            servent uniquement à vous répondre :{" "}
-            <Link className="gradient-text" href="/mentions-legales#formulaire">
-              en savoir plus
-            </Link>
-            .
+            {t.rich("notice", {
+              link: (chunks) => (
+                <Link
+                  className="gradient-text"
+                  href="/mentions-legales#formulaire"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
           </p>
           <button
             type="submit"
             className="gradient-button disabled:opacity-60"
             disabled={sending}
           >
-            {sending ? "Envoi en cours…" : "Envoyer votre message"}
+            {sending ? t("sending") : t("send")}
           </button>
         </form>
       )}

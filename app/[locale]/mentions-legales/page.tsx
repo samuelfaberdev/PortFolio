@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import StatsOptOut from "../components/StatsOptOut";
+import { setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import StatsOptOut from "../../components/StatsOptOut";
 
 export const metadata: Metadata = {
   title: "Mentions légales et confidentialité | Samuel Faber",
@@ -32,7 +34,12 @@ function Section({
 
 const linkClass = "gradient-text font-bold hover:opacity-80";
 
-export default function MentionsLegales() {
+export default function MentionsLegales({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
   return (
     <main className="w-full max-w-3xl p-4 flex flex-col gap-10 leading-relaxed">
       <header className="flex flex-col gap-2">
@@ -56,9 +63,9 @@ export default function MentionsLegales() {
             {CONTACT_EMAIL}
           </a>{" "}
           ou via le{" "}
-          <a className={linkClass} href="/#contact">
+          <Link className={linkClass} href="/#contact">
             formulaire de contact
-          </a>
+          </Link>
           .
         </p>
       </Section>

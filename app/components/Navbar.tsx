@@ -1,15 +1,18 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 const LINKS = [
-  { href: "/#a-propos", label: "A propos" },
-  { href: "/#projets", label: "Mes projets" },
-  { href: "/#recommandations", label: "Recommandations" },
-  { href: "/#contact", label: "Contact" },
-];
+  { href: "/#a-propos", key: "about" },
+  { href: "/#projets", key: "projects" },
+  { href: "/#recommandations", key: "recommendations" },
+  { href: "/#contact", key: "contact" },
+] as const;
 
 export default function Navbar() {
+  const t = useTranslations("Nav");
   const [open, setOpen] = useState(false);
 
   return (
@@ -18,9 +21,9 @@ export default function Navbar() {
       <ul className="hidden lg:flex text-xl xl:text-2xl gap-6 xl:gap-8 whitespace-nowrap">
         {LINKS.map((link) => (
           <li key={link.href}>
-            <a href={link.href} className="transition hover:opacity-70">
-              {link.label}
-            </a>
+            <Link href={link.href} className="transition hover:opacity-70">
+              {t(link.key)}
+            </Link>
           </li>
         ))}
       </ul>
@@ -29,7 +32,7 @@ export default function Navbar() {
       <button
         type="button"
         className="lg:hidden p-2 rounded-lg transition hover:opacity-70"
-        aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+        aria-label={open ? t("closeMenu") : t("openMenu")}
         aria-expanded={open}
         aria-controls="menu-mobile"
         onClick={() => setOpen((value) => !value)}
@@ -59,13 +62,13 @@ export default function Navbar() {
         >
           {LINKS.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="block px-6 py-4 transition hover:opacity-70"
                 onClick={() => setOpen(false)}
               >
-                {link.label}
-              </a>
+                {t(link.key)}
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,0 +1,125 @@
+{
+  "Metadata": {
+    "title": "Samuel Faber · AI Developer, Data Engineering & MLOps",
+    "description": "Portfolio of Samuel Faber, web and AI application developer: projects, background and contact. Looking for a work-study position or a permanent job in Data Engineering or MLOps, Nantes area (France).",
+    "ogImageAlt": "Samuel Faber, web and AI application developer, looking for a work-study position or a permanent job in Data Engineering or MLOps"
+  },
+  "Header": {
+    "logoAlt": "Logo",
+    "home": "Home"
+  },
+  "Nav": {
+    "about": "About",
+    "projects": "Projects",
+    "recommendations": "Recommendations",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Language": {
+    "label": "Language",
+    "switchTo": "Lire ce site en français",
+    "fr": "Français",
+    "en": "English"
+  },
+  "Theme": {
+    "system": "automatic (system setting)",
+    "light": "light",
+    "dark": "dark",
+    "ariaLabel": "{current} theme. Switch to {next} theme",
+    "title": "Theme: {current}"
+  },
+  "Footer": {
+    "copyright": "© {year} - Built with 💖 by Samuel Faber",
+    "analytics": "Anonymous, cookie-free visitor statistics, hosted on my own server (Umami).",
+    "legal": "Legal notice and privacy"
+  },
+  "Hero": {
+    "title": "Hello, world! I'm <strong>Samuel</strong>!",
+    "welcome": "Welcome to my <strong>Portfolio</strong>.",
+    "intro": "A <strong>Web and AI Application Developer</strong>, I switched careers into <strong>web development</strong> before going on to Le Wagon's <strong>Data Science & AI</strong> Bootcamp.",
+    "search": "I'm mainly looking for a <strong>work-study position (master's level)</strong> or a <strong>permanent job</strong> in <strong>Data Science</strong>, more specifically in <strong>Data Engineering</strong> or <strong>MLOps</strong>, around Saint-Nazaire and Nantes (France), on site, hybrid or remote.",
+    "contact": "Contact me",
+    "cv": "Download my CV (in French)",
+    "cvTitle": "CV in French (PDF)",
+    "photoAlt": "My profile picture"
+  },
+  "About": {
+    "title": "About me",
+    "intro1": "Originally trained in industrial and then biomedical maintenance, and after working in many other jobs, I chose to retrain in web development, then moved on to Data Science and artificial intelligence.",
+    "intro2": "In this section you'll find the skills I picked up during my career change and professional path, as well as my experience in development and data.",
+    "imageAlt": "A computer desk",
+    "tabs": {
+      "hardskills": "Hard Skills",
+      "softskills": "Soft Skills",
+      "education": "Education",
+      "experiences": "Experience"
+    }
+  },
+  "Projects": {
+    "title": "My projects",
+    "intro": "Training projects, hackathons, personal projects and a few games, built solo or as a team: here is a selection of what I've built, from front end to back end and data.",
+    "preview": "Preview of the {title} project",
+    "teamOf": "👥 Team project ({size} people)",
+    "team": "👥 Team project",
+    "solo": "👤 Solo project",
+    "role": "My role:",
+    "technologies": "Technologies",
+    "demo": "Visit the site",
+    "notOnline": "Not online yet",
+    "code": "Code",
+    "allOnGithub": "See all my projects on GitHub →"
+  },
+  "Recommendations": {
+    "title": "What people say",
+    "intro": "A few words from my teacher at Le Wagon and my managers at the Wild Code School, taken from their recommendations published on LinkedIn.",
+    "showTranslation": "Show English translation",
+    "translation": "Translation: ",
+    "allOnLinkedin": "See all my recommendations on LinkedIn →"
+  },
+  "Contact": {
+    "title": "Contact me",
+    "intro1": "I'm currently looking for new opportunities!",
+    "intro2": "Feel free to reach out right now on LinkedIn, GitHub or by email.",
+    "available": "💼 <strong>Available</strong> for a work-study position (master's level) or a permanent job in Data Science, more specifically in Data Engineering or MLOps",
+    "location": "📍 Saint-Nazaire and Nantes area (France)",
+    "remote": "🏠 On site, hybrid or remote",
+    "github": "GitHub profile",
+    "linkedin": "LinkedIn profile"
+  },
+  "ContactForm": {
+    "email": "Email:",
+    "emailPlaceholder": "name@provider.com",
+    "subject": "Subject:",
+    "subjectPlaceholder": "Hi Samuel!",
+    "message": "Your message:",
+    "messagePlaceholder": "Hi Samuel, let's talk about your project...",
+    "notice": "Cookie-free, tracking-free spam protection (ALTCHA). Your data is only used to reply to you: <link>learn more</link>.",
+    "sending": "Sending…",
+    "send": "Send your message",
+    "sent": "Message sent successfully!"
+  },
+  "Actions": {
+    "invalidEmail": "Invalid email address.",
+    "subjectRequired": "A subject is required ({max} characters max).",
+    "messageRequired": "A message is required ({max} characters max).",
+    "spamCheckFailed": "The spam check failed, please try again.",
+    "error": "Something went wrong.",
+    "sendFailed": "Sending failed, please try again later.",
+    "success": "Message sent successfully."
+  },
+  "EasterEgg": {
+    "found": "Well done, you're the <b>{rank, selectordinal, one {#st} two {#nd} few {#rd} other {#th}}</b> person to find this easter egg!",
+    "alreadyFound": "<b>{count, number}</b> {count, plural, one {person has} other {people have}} found this easter egg (and you're one of them!)"
+  },
+  "StatsOptOut": {
+    "optedOut": "🚫 Your visits are not counted in the statistics on this browser.",
+    "optedIn": "📊 Your visits are counted anonymously in the statistics.",
+    "enable": "Turn statistics back on",
+    "disable": "Opt out of statistics"
+  },
+  "NotFound": {
+    "message": "This page doesn't exist (or no longer does).",
+    "back": "Back to home"
+  }
+}

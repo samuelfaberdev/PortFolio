@@ -1,10 +1,14 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState, useTransition } from "react";
 import { DATA } from "../utils/data";
 
+const TABS = ["hardskills", "softskills", "education", "experiences"] as const;
+
 export default function AboutSection() {
+  const t = useTranslations("About");
   const [tab, setTab] = useState("hardskills");
 
   const [, startTransition] = useTransition();
@@ -24,56 +28,29 @@ export default function AboutSection() {
         <Image
           className="rounded-3xl"
           src={"/images/bureau.jpg"}
-          alt="Un bureau d'ordinateur"
+          alt={t("imageAlt")}
           width={400}
           height={400}
         />
       </div>
       <article className="flex flex-col gap-4 w-full lg:w-4/6">
-        <h2 className="text-3xl lg:text-4xl">A propos de moi</h2>
-        <p>
-          De formation initiale dans la maintenance industrielle puis
-          biomédicale, et après avoir exercé de nombreux autres métiers,
-          j&apos;ai choisi de me reconvertir dans le développement web, avant de
-          poursuivre vers la Data Science et l&apos;intelligence artificielle.
-        </p>
-        <p>
-          Dans cette section vous découvrirez mes diverses compétences acquises
-          au fil de ma reconversion et de mon parcours professionnel, ainsi que
-          mes différentes expériences dans le développement et la data.
-        </p>
-        <div className="flex flex-wrap gap-x-4 gap-y-2">
-          <button
-            className="font-bold"
-            onClick={() => handleTabChange("hardskills")}
-          >
-            Hard Skills
-            <p className={tab === "hardskills" ? "active" : "h-0.5"}></p>
-          </button>
-
-          <button
-            className="font-bold"
-            onClick={() => handleTabChange("softskills")}
-          >
-            Soft Skills
-            <p className={tab === "softskills" ? "active" : "h-0.5"}></p>
-          </button>
-
-          <button
-            className="font-bold"
-            onClick={() => handleTabChange("education")}
-          >
-            Formations
-            <p className={tab === "education" ? "active" : "h-0.5"}></p>
-          </button>
-
-          <button
-            className="font-bold"
-            onClick={() => handleTabChange("experiences")}
-          >
-            Experiences
-            <p className={tab === "experiences" ? "active" : "h-0.5"}></p>
-          </button>
+        <h2 className="text-3xl lg:text-4xl">{t("title")}</h2>
+        <p>{t("intro1")}</p>
+        <p>{t("intro2")}</p>
+        <div role="tablist" className="flex flex-wrap gap-x-4 gap-y-2">
+          {TABS.map((id) => (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={tab === id}
+              className="font-bold"
+              onClick={() => handleTabChange(id)}
+            >
+              {t(`tabs.${id}`)}
+              <p className={tab === id ? "active" : "h-0.5"}></p>
+            </button>
+          ))}
         </div>
         <div>{DATA.find((t) => t.id === tab)?.content}</div>
       </article>
