@@ -2,17 +2,18 @@ name: CI
 
 # Vérifie chaque pull request et chaque mise à jour de main :
 # qualité du code, build Next.js, puis build et démarrage de l'image Docker
-# de production.
+# de production. Sur main, si tout est vert, déploie sur le VPS.
 on:
   pull_request:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Une nouvelle poussée sur la même branche annule la vérification en cours
+# Une nouvelle poussée sur une PR annule sa vérification en cours.
+# Sur main, rien n'est annulé : un déploiement ne doit pas être coupé.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
@@ -113,3 +114,53 @@ jobs:
       - name: Journaux du conteneur
         if: always()
         run: docker logs portfolio 2>&1 | tail -50 || true
+
+  deploiement:
+    name: Déploiement sur le VPS
+    # Uniquement après une fusion sur main, et si les deux vérifications passent
+    needs: [qualite, docker]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: production
+      url: https://samuelfaber.dev
+    concurrency:
+      group: deploiement-production
+      cancel-in-progress: false
+    steps:
+      - name: Configuration de la connexion SSH
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # Empreinte du serveur connue d'avance : refus si elle change
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      # La clé est restreinte côté serveur : elle ne peut lancer que
+      # scripts/deploy.sh (voir le README), quelle que soit la commande envoyée.
+      - name: Déploiement
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT || '22' }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$VPS_PORT" \
+            -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o ServerAliveInterval=30 \
+            "$VPS_USER@$VPS_HOST"
+
+      - name: Vérification du site en ligne
+        run: |
+          for url in https://samuelfaber.dev/ https://samuelfaber.dev/en; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Accept-Language: fr-FR' "$url")
+            if [ "$code" = 200 ]; then echo "✅ $url ($code)";
+            else echo "❌ $url : $code"; exit 1; fi
+          done
+
+      - name: Nettoyage de la clé
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

@@ -203,6 +203,28 @@ Chaque pull request et chaque mise à jour de `main` lance [`.github/workflows/c
 
 Les secrets utilisés sont factices : aucun e-mail n'est envoyé. Si une étape échoue, la PR est marquée en rouge, et les journaux du conteneur sont affichés à la fin du job.
 
+## Déploiement automatique
+
+Après chaque fusion sur `main`, si les deux vérifications sont vertes, le job **Déploiement sur le VPS** se connecte en SSH au serveur et lance [`scripts/deploy.sh`](scripts/deploy.sh) : mise à jour du code, rebuild, redémarrage, puis vérification que le site répond. Le job contrôle ensuite `https://samuelfaber.dev/` et `/en`. En cas d'échec, GitHub envoie un e-mail.
+
+La clé SSH utilisée est **dédiée et restreinte** : dans `/root/.ssh/authorized_keys`, elle ne peut lancer que le déploiement (pas de shell, pas de redirection de port) :
+
+```text
+restrict,command="cd /root/apps/portfolio && git pull --ff-only -q && exec bash scripts/deploy.sh" ssh-ed25519 AAAA… github-actions-deploy
+```
+
+Secrets de l'environnement GitHub `production` (*Settings* → *Environments*) :
+
+| Secret            | Contenu                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| `VPS_HOST`        | Adresse IP du serveur                                       |
+| `VPS_USER`        | Utilisateur SSH (`root`)                                    |
+| `VPS_PORT`        | Port SSH, facultatif (22 par défaut)                        |
+| `VPS_SSH_KEY`     | Clé privée dédiée au déploiement                            |
+| `VPS_KNOWN_HOSTS` | Empreinte du serveur (sortie de `ssh-keyscan`)              |
+
+Pour déployer à la main : `bash /root/apps/portfolio/scripts/deploy.sh`.
+
 ## Déploiement (Docker)
 
 Sur le serveur, crée un fichier `.env` à la racine avec les variables d'environnement, puis lance :
