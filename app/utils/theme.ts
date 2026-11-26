@@ -22,3 +22,19 @@ export const themeInitScript = `(function () {
   media.addEventListener("change", apply);
   window.__applyTheme = apply;
 })();`;
+
+declare global {
+  interface Window {
+    __applyTheme?: () => void;
+  }
+}
+
+/**
+ * Secours : sur les pages 404, Next.js 14 construit la page dans le navigateur
+ * et le script du <head> n'est alors jamais exécuté. On le lance ici s'il
+ * manque, pour que le thème et le bouton de thème fonctionnent partout.
+ */
+export function ensureThemeInit() {
+  if (typeof window === "undefined" || window.__applyTheme) return;
+  new Function(themeInitScript)();
+}
