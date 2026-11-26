@@ -13,6 +13,10 @@ RUN npm install
 COPY app ./app
 COPY public ./public
 COPY @types ./@types
+# Langues : configuration, textes de l'interface et détection de la langue
+COPY i18n ./i18n
+COPY messages ./messages
+COPY middleware.ts .
 COPY next.config.mjs .
 COPY tsconfig.json .
 COPY tailwind.config.ts .
