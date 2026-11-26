@@ -2,13 +2,11 @@
 
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { THEME_STORAGE_KEY, type ThemePreference } from "../utils/theme";
-
-declare global {
-  interface Window {
-    __applyTheme?: () => void;
-  }
-}
+import {
+  ensureThemeInit,
+  THEME_STORAGE_KEY,
+  type ThemePreference,
+} from "../utils/theme";
 
 const ORDER: ThemePreference[] = ["system", "light", "dark"];
 
@@ -53,6 +51,7 @@ export default function ThemeToggle() {
 
   // Lecture du choix enregistré après le montage (évite un écart d'hydratation)
   useEffect(() => {
+    ensureThemeInit();
     let stored: string | null = null;
     try {
       stored = localStorage.getItem(THEME_STORAGE_KEY);
