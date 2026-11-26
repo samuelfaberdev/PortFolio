@@ -16,11 +16,23 @@ Portfolio de **Samuel Faber**, Concepteur Développeur d'Applications Web et IA,
 
 Le site est responsive (mobile, tablette, ordinateur). Un bouton dans l'en-tête permet de choisir le thème : automatique (selon le système), clair ou sombre. Le choix est mémorisé dans le navigateur ([`app/utils/theme.ts`](app/utils/theme.ts)).
 
+## Langues (français / anglais)
+
+Le site existe en **français** (langue principale, à la racine `/`) et en **anglais** (sous `/en`), grâce à [next-intl](https://next-intl.dev/).
+
+- **Choix automatique** ([`middleware.ts`](middleware.ts)) : seule la première langue du navigateur compte. Si elle est française (`fr`, `fr-BE`, `fr-CA`…), le site s'affiche en français ; sinon, en anglais. Sans langue indiquée (robots d'indexation, aperçus de liens), il s'affiche en français.
+- **Choix manuel** : le sélecteur FR / EN de l'en-tête garde la section affichée. Le choix est mémorisé 12 mois dans le cookie `NEXT_LOCALE`, posé seulement s'il diffère de la langue du navigateur.
+- **Textes de l'interface** : [`messages/fr.json`](messages/fr.json) et [`messages/en.json`](messages/en.json), avec les mêmes clés dans les deux fichiers.
+- **Contenu** : chaque texte des projets, des onglets « À propos » et des recommandations s'écrit `{ fr: "…", en: "…" }`. Les mentions légales ont une version par langue dans [`app/[locale]/mentions-legales/`](app/%5Blocale%5D/mentions-legales/), et la version française fait foi.
+- **Référencement** : balises `hreflang` (avec `x-default` = français), [`sitemap.xml`](app/sitemap.ts), [`robots.txt`](app/robots.ts) et une image d'aperçu par langue (`og-image.jpg`, `og-image-en.jpg`, sources dans [`design/`](design/)).
+- Le CV n'existe qu'en français : le bouton l'indique dans la version anglaise.
+
 ## Stack technique
 
 | Domaine               | Outils                                                                                                                    |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Framework             | [Next.js 14](https://nextjs.org/) (App Router, Server Actions), React 18, TypeScript                                      |
+| Langues               | [next-intl](https://next-intl.dev/) (français et anglais)                                                                 |
 | Style                 | Tailwind CSS, `tailwindcss-animated`                                                                                      |
 | Formulaire de contact | [Resend](https://resend.com/) pour l'envoi d'e-mails, [ALTCHA](https://altcha.org/) contre le spam (sans cookie ni tiers) |
 | Notifications         | `react-toastify`                                                                                                          |
@@ -103,8 +115,11 @@ Les statistiques sont gérées par [Umami](https://umami.is/), auto-hébergé su
 | `easter-egg-trouve`             | Première visite d'un navigateur sur la page cachée                   |
 | `recommandations-linkedin`      | Lien « Voir toutes mes recommandations sur LinkedIn »                |
 | `changement-theme`              | Bouton de thème de l'en-tête (propriété `theme` : thème choisi)      |
+| `changement-langue`             | Sélecteur FR / EN (propriété `langue` : langue choisie)              |
 
 Pour un nouveau bouton, ajouter l'attribut `data-umami-event="nom-de-l-evenement"`. Dans du code, utiliser `trackEvent()` ([`app/utils/analytics.ts`](app/utils/analytics.ts)).
+
+Les pages vues en anglais apparaissent avec le préfixe `/en` dans Umami.
 
 Pour savoir d'où viennent les visiteurs, partager des liens avec un paramètre `utm_source`, par exemple `https://samuelfaber.dev/?utm_source=cv`, `?utm_source=linkedin` ou `?utm_source=github`.
 
@@ -128,14 +143,15 @@ Les projets sont définis dans [`app/utils/projects.ts`](app/utils/projects.ts).
 ```ts
 {
   title: "Mon projet",
-  context: "Projet perso · Wild Code School", // petite ligne au-dessus du titre
-  description: "Une ou deux phrases sur le projet.",
+  context: { fr: "Projet perso", en: "Personal project" }, // petite ligne au-dessus du titre
+  description: { fr: "Une ou deux phrases.", en: "One or two sentences." },
   stack: ["React", "Node.js"],
   emoji: "🚀",                                 // affiché s'il n'y a pas d'image
   image: "/images/projets/mon-projet.webp",    // optionnel
-  demo: { url: "https://…", label: "Voir le site" }, // optionnel, label par défaut : « Voir le site »
-  unavailable: { label: "Pas encore en ligne", hint: "…" }, // optionnel, badge non cliquable si pas de démo
+  demo: { url: "https://…" },                 // optionnel, label par défaut : « Voir le site »
+  unavailable: { label: { fr: "…", en: "…" } }, // optionnel, badge non cliquable si pas de démo
   repo: "https://github.com/…",                // optionnel
+  team: { size: 4, role: { fr: "…", en: "…" } }, // optionnel, absent = projet réalisé seul
 }
 ```
 
@@ -148,21 +164,27 @@ Les onglets de la section « À propos » se modifient dans [`app/utils/data.tsx
 ```text
 app/
 ├── actions.ts            # Server Action du formulaire de contact
-├── layout.tsx            # Layout global (en-tête, pied de page, thème, Umami)
-├── page.tsx              # Page d'accueil (assemble les sections)
-├── game/page.tsx         # Page cachée (easter egg)
-├── mentions-legales/     # Mentions légales et politique de confidentialité
+├── [locale]/             # Pages, une version par langue (/ et /en)
+│   ├── layout.tsx        # Layout global (en-tête, pied de page, thème, Umami, métadonnées)
+│   ├── page.tsx          # Page d'accueil (assemble les sections)
+│   ├── game/page.tsx     # Page cachée (easter egg)
+│   └── mentions-legales/ # Mentions légales et confidentialité (FR et EN)
+├── sitemap.ts, robots.ts # Plan du site et consignes aux robots
 ├── api/                  # Routes : défi ALTCHA, compteur de l'easter egg
 ├── components/           # Header, Navbar, sections Hero / About / Projects / Contact…
 └── utils/
     ├── data.tsx          # Contenu des onglets « À propos »
     ├── projects.ts       # Liste des projets
+    ├── recommendations.ts # Recommandations LinkedIn
     ├── altcha.ts         # Création et vérification des défis anti-spam
     ├── analytics.ts      # Envoi d'événements à Umami
     ├── theme.ts          # Thème clair / sombre
     └── visitCounter.ts   # Compteur de l'easter egg
+i18n/                     # Langues : routage, navigation, hreflang
+messages/                 # Textes de l'interface (fr.json, en.json)
+middleware.ts             # Choix de la langue selon le navigateur
 public/
-├── cv/                   # CV téléchargeable
+├── cv/                   # CV téléchargeable (en français)
 └── images/               # Photo, icônes, visuels des projets
 @types/                  # Typages (konami, altcha, umami)
 analytics/                # Umami : compose, exemple Caddy, script de purge

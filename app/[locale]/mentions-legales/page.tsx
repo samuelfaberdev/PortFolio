@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { alternatesFor } from "@/i18n/metadata";
 import LegalEn from "./content-en";
 import LegalFr from "./content-fr";
 
@@ -19,7 +20,11 @@ const META = {
 type Props = { params: { locale: string } };
 
 export function generateMetadata({ params: { locale } }: Props): Metadata {
-  return locale === "en" ? META.en : META.fr;
+  const lang = locale === "en" ? "en" : "fr";
+  return {
+    ...META[lang],
+    alternates: alternatesFor("/mentions-legales", lang),
+  };
 }
 
 export default function MentionsLegales({ params: { locale } }: Props) {
